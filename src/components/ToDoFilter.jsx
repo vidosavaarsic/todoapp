@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
-const ToDoFilter = () => {
+const ToDoFilter = ({ todos, setTodos }) => {
   return (
-    <div>ToDoFilter</div>
-  )
-}
+    <div className="flex row gap-2">
+      <div>Search</div>
+      <div>All</div>
+    </div>
+  );
+};
 
-export default ToDoFilter
+export default ToDoFilter;
