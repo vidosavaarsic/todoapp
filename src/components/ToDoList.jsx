@@ -26,7 +26,7 @@ const ToDoList = ({ todos, setTodos }) => {
     setEditText(currentText);
     setIsEditing(true);
   };
-  const handleSave = () => {
+  const handleSaveEdit = () => {
     setTodos((prev) =>
       prev.map((todo) =>
         todo.id === editId ? { ...todo, description: editText } : todo
@@ -36,10 +36,28 @@ const ToDoList = ({ todos, setTodos }) => {
     setEditId(null);
     setEditText("");
   };
-  const handleCancel = () => {
+  const handleCancelEdit = () => {
     setIsEditing(false);
     setEditId(null);
     setEditText("");
+  };
+
+  const [addText, setAddText] = useState("");
+  const [isAdding, setIsAdding] = useState(false);
+  const handleAdd = () => {
+    setIsAdding(true);
+  };
+  const handleCancelAdd = () => {
+    setAddText("");
+    setIsAdding(false);
+  };
+  const handleSaveAdd = () => {
+    setTodos([
+      ...todos,
+      { id: Date.now(), description: addText, status: "panding" },
+    ]);
+    setAddText("");
+    setIsAdding(false);
   };
   return (
     <div className="">
@@ -96,12 +114,7 @@ const ToDoList = ({ todos, setTodos }) => {
         ))}
       </ul>
       <PlusIcon
-        onClick={() =>
-          setTodos([
-            ...todos,
-            { id: Date.now(), description: "New note...", status: "panding" },
-          ])
-        }
+        onClick={() => handleAdd()}
         className="bg-[var(--purple)] hover:bg-[var(--purple)] text-white w-12 h-12 flex items-center justify-center mt-40 ml-auto text-center rounded-full shadow-full text-sm cursor-pointer "
       />
       {isEditing && (
@@ -116,13 +129,41 @@ const ToDoList = ({ todos, setTodos }) => {
             />
             <div className="flex justify-between mt-20">
               <button
-                onClick={handleCancel}
+                onClick={handleCancelEdit}
                 className="bg-white hover:bg-gray-400 text-[var(--purple)] px-4 py-2 rounded-md ring-1 ring-[var(--purple)] font-semibold"
               >
                 CANCEL
               </button>
               <button
-                onClick={handleSave}
+                onClick={handleSaveEdit}
+                className="bg-[var(--purple)] hover:brightness-90 text-white px-4 py-2 rounded-md font-semibold"
+              >
+                APPLY
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {isAdding && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-xl shadow-lg w-[90%] max-w-md">
+            <h2 className="text-xl font-semibold mb-4">NEW NOTE</h2>
+            <input
+              type="text"
+              value={addText}
+              onChange={(e) => setAddText(e.target.value)}
+              className="w-full border border-[var(--purple)] rounded-md p-2 mb-4 focus:outline-none"
+              placeholder="Input your note..."
+            />
+            <div className="flex justify-between mt-20">
+              <button
+                onClick={handleCancelAdd}
+                className="bg-white hover:bg-gray-400 text-[var(--purple)] px-4 py-2 rounded-md ring-1 ring-[var(--purple)] font-semibold"
+              >
+                CANCEL
+              </button>
+              <button
+                onClick={handleSaveAdd}
                 className="bg-[var(--purple)] hover:brightness-90 text-white px-4 py-2 rounded-md font-semibold"
               >
                 APPLY
