@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root {
+  --purple: #6c63ff;
+}
 .App {
   text-align: center;
 }
