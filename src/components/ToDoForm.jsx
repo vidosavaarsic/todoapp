@@ -13,12 +13,12 @@ const ToDoForm = () => {
     {
       id: 2,
       description: "NOTE #2",
-      status: "pending",
+      status: "done",
     },
     {
       id: 3,
       description: "NOTE #3",
-      status: "done",
+      status: "pending",
     },
   ]);
   const [searchText, setSearchText] = useState("");
@@ -28,7 +28,7 @@ const ToDoForm = () => {
     const matchesText = todo.description
       .toLowerCase()
       .includes(searchText.toLowerCase());
-    console.log("matchesText: ",todo.description, matchesText);
+    console.log("matchesText: ", todo.description, matchesText);
     const matchesStatus =
       statusFilter === "all" || todo.status === statusFilter;
 
@@ -47,28 +47,13 @@ const ToDoForm = () => {
           statusFilter={statusFilter}
           setStatusFilter={setStatusFilter}
         />
-        <button className="bg-[var(--purple)] cursor-pointer rounded-md p-2 text-white">
+        <button className="bg-[var(--purple)] cursor-pointer rounded-md p-2 text-white hover:brightness-90">
           <MoonIcon className="h-6 w-6" />
         </button>
       </div>
-      <div className="flex col gap-2 m-4 justify-center">
+      <div className="flex col gap-2 m-4 justify-center h-[60vh]">
         <ToDoList todos={filteredTodos} setTodos={setTodos} />
       </div>
-      <button
-        onClick={() =>
-          setTodos([
-            ...todos,
-            {
-              id: Date.now(),
-              description: "New note...",
-              status: "ready",
-            },
-          ])
-        }
-        className="fixed bottom-8 right-8 bg-[var(--purple)] hover:bg-[var(--purple)] text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg"
-      >
-        +
-      </button>
     </div>
   );
 };

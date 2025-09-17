@@ -7,7 +7,7 @@ const ToDoFilter = ({
   setStatusFilter,
 }) => {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-6">
       <div className="relative">
         <MagnifyingGlassIcon className="h-6 w-6 absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--purple)]" />
         <input
@@ -15,7 +15,7 @@ const ToDoFilter = ({
           placeholder="Search note..."
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
-          className="px-3 py-2 border rounded-md text-sm focus:outline-none ring-1 ring-[var(--purple)] cursor-pointer text-[var(--purple)]"
+          className="px-3 py-2 border rounded-md text-sm focus:outline-none ring-1 ring-[var(--purple)] cursor-pointer text-[var(--purple)] w-80 lg:w-[40rem]"
         />
       </div>
       <select
