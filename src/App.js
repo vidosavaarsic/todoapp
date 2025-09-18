@@ -1,13 +1,15 @@
-import './App.css';
-import ToDoForm from './components/ToDoForm'
+import React from "react";
+import "./App.css";
+import ToDoForm from "./components/ToDoForm";
+import { ThemeProvider } from "./components/ThemeContext";
 
 function App() {
   return (
-    <div className="App">
-      <header className="bg-white">
-        <ToDoForm/>
-      </header>
-    </div>
+    <ThemeProvider>
+      <div className="App min-h-screen bg-[var(--white)] dark:bg-[var(--black)] dark:text-[var(--white)]">
+        <ToDoForm />
+      </div>
+    </ThemeProvider>
   );
 }
 

@@ -2,7 +2,7 @@ import React from "react";
 
 const Tab = ({ setStatusFilter, text, color, value, isActive }) => {
   return (
-    <div className="m-1">
+    <div className="m-1 dark:text-[var(--black)]">
       <button
         style={{ backgroundColor: color }}
         className={`p-2 w-20 ${

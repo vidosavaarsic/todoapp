@@ -3,6 +3,8 @@
 @tailwind utilities;
 :root {
   --purple: #6c63ff;
+  --black: #252525;
+  --white: #f7f7f7;
 }
 .App {
   text-align: center;

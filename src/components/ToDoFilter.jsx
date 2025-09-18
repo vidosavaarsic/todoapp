@@ -10,13 +10,13 @@ const ToDoFilter = ({
   return (
     <div className="flex items-center gap-6 flex-wrap">
       <div className="relative">
-        <MagnifyingGlassIcon className="h-6 w-6 absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--purple)]" />
+        <MagnifyingGlassIcon className="h-6 w-6 absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--purple)] dark:text-[var(--white)]" />
         <input
           type="text"
           placeholder="Search note..."
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
-          className="px-3 py-2 border rounded-md text-sm focus:outline-none ring-1 ring-[var(--purple)] cursor-pointer text-[var(--purple)] w-80 lg:w-[40rem]"
+          className="px-3 py-2 border rounded-md text-sm focus:outline-none ring-1 ring-[var(--purple)] dark:ring-[var(--white)] bg-[var(--white)] dark:bg-[var(--black)] cursor-pointer text-[var(--purple)] dark:text-[var(--white)] w-80 lg:w-[40rem]"
         />
       </div>
       <div className="flex flex-row">
