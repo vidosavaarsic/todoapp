@@ -40,7 +40,7 @@ const ToDoForm = () => {
       <h1 className="mx-auto py-2 mb-8 mt-16 font-semibold lg:text-4xl md:text-3xl text-2xl">
         TODO LIST
       </h1>
-      <div className="flex row justify-center gap-6">
+      <div className="flex flex-row justify-center gap-6 flex-wrap-reverse p-4">
         <ToDoFilter
           searchText={searchText}
           setSearchText={setSearchText}
