@@ -19,16 +19,6 @@ const ToDoFilter = ({
           className="px-3 py-2 border rounded-md text-sm focus:outline-none ring-1 ring-[var(--purple)] cursor-pointer text-[var(--purple)] w-80 lg:w-[40rem]"
         />
       </div>
-      {/* <select
-        value={statusFilter}
-        onChange={(e) => setStatusFilter(e.target.value)}
-        className="border rounded-md text-2xl h-10 bg-[var(--purple)] text-white focus:outline-none cursor-pointer"
-      >
-        <option value="all">ALL</option>
-        <option value="ready">READY</option>
-        <option value="pending">PENDING</option>
-        <option value="done">DONE</option>
-      </select> */}
       <div className="flex flex-row">
         <Tab
           setStatusFilter={setStatusFilter}

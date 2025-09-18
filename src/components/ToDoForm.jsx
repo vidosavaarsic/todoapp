@@ -48,7 +48,7 @@ const ToDoForm = () => {
           setStatusFilter={setStatusFilter}
         />
         <button className="bg-[var(--purple)] cursor-pointer rounded-md p-2 text-white hover:brightness-90">
-          <MoonIcon className="h-6 w-6" />
+          <MoonIcon className="h-6 w-8" />
         </button>
       </div>
       <div className="flex col gap-2 m-4 justify-center h-[60vh]">
