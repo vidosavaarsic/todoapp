@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import ToDoFilter from "./ToDoFilter";
 import ToDoList from "./ToDoList";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import { useTheme } from "./ThemeContext";
-//import { useMemo } from "react";
 
 const ToDoForm = () => {
   const [todos, setTodos] = useState([
@@ -27,15 +26,17 @@ const ToDoForm = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const { darkMode, setDarkMode } = useTheme();
 
-  const filteredTodos = todos.filter((todo) => {
-    const matchesText = todo.description
-      .toLowerCase()
-      .includes(searchText.toLowerCase());
-    const matchesStatus =
-      statusFilter === "all" || todo.status === statusFilter;
-
-    return matchesText && matchesStatus;
-  });
+  const filteredTodos = useMemo(() => {
+    return todos.filter((todo) => {
+      const matchesText = todo.description
+        .toLowerCase()
+        .includes(searchText.toLowerCase());
+      const matchesStatus =
+        statusFilter === "all" || todo.status === statusFilter;
+      console.log("Tu sam...");
+      return matchesText && matchesStatus;
+    });
+  }, [todos, searchText, statusFilter]);
 
   return (
     <div className="justify-center">

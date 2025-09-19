@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 const ToDoList = ({ todos, setTodos }) => {
+  const [editId, setEditId] = useState(null);
+  const [editText, setEditText] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [addText, setAddText] = useState("");
+  const [isAdding, setIsAdding] = useState(false);
+
   const handleStatus = (id) => {
     setTodos((prev) =>
       prev.map((todo) =>
@@ -13,18 +19,17 @@ const ToDoList = ({ todos, setTodos }) => {
       )
     );
   };
+
   const handleDelete = (id) => {
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
 
-  const [editId, setEditId] = useState(null);
-  const [editText, setEditText] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
   const handleEdit = (id, currentText) => {
     setEditId(id);
     setEditText(currentText);
     setIsEditing(true);
   };
+
   const handleSaveEdit = () => {
     setTodos((prev) =>
       prev.map((todo) =>
@@ -35,21 +40,22 @@ const ToDoList = ({ todos, setTodos }) => {
     setEditId(null);
     setEditText("");
   };
+
   const handleCancelEdit = () => {
     setIsEditing(false);
     setEditId(null);
     setEditText("");
   };
 
-  const [addText, setAddText] = useState("");
-  const [isAdding, setIsAdding] = useState(false);
   const handleAdd = () => {
     setIsAdding(true);
   };
+
   const handleCancelAdd = () => {
     setAddText("");
     setIsAdding(false);
   };
+
   const handleSaveAdd = () => {
     setTodos([
       ...todos,
@@ -58,6 +64,7 @@ const ToDoList = ({ todos, setTodos }) => {
     setAddText("");
     setIsAdding(false);
   };
+
   return (
     <div className="dark:text-white]">
       {Array.isArray(todos) && todos.length > 0 ? (
