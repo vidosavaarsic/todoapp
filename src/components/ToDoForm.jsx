@@ -3,28 +3,13 @@ import ToDoFilter from "./ToDoFilter";
 import ToDoList from "./ToDoList";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import { useTheme } from "./ThemeContext";
+import { useTodos } from "./ToDoContext";
 
 const ToDoForm = () => {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      description: "NOTE #1",
-      status: "ready",
-    },
-    {
-      id: 2,
-      description: "NOTE #2",
-      status: "done",
-    },
-    {
-      id: 3,
-      description: "NOTE #3",
-      status: "pending",
-    },
-  ]);
   const [searchText, setSearchText] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const { darkMode, setDarkMode } = useTheme();
+  const { todos } = useTodos();
 
   const filteredTodos = useMemo(() => {
     return todos.filter((todo) => {
@@ -62,7 +47,7 @@ const ToDoForm = () => {
         </button>
       </div>
       <div className="flex col gap-2 m-4 justify-center h-[60vh]">
-        <ToDoList todos={filteredTodos} setTodos={setTodos} />
+        <ToDoList todos={filteredTodos} />
       </div>
     </div>
   );

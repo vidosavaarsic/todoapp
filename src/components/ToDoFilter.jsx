@@ -1,6 +1,7 @@
 import React from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Tab from "./Tab";
+
 const ToDoFilter = ({
   searchText,
   setSearchText,
