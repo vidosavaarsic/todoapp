@@ -4,21 +4,23 @@ import ToDoList from "./ToDoList";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import { useTheme } from "./ThemeContext";
 import { useTodos } from "./ToDoContext";
+import { FilterStatusType, ToDo } from "../types";
 
-const ToDoForm = () => {
-  const [searchText, setSearchText] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
+const ToDoForm: React.FC = () => {
+  const [searchText, setSearchText] = useState<string>("");
+  const [statusFilter, setStatusFilter] = useState<FilterStatusType>("all");
+
   const { darkMode, setDarkMode } = useTheme();
   const { todos } = useTodos();
 
-  const filteredTodos = useMemo(() => {
-    return todos.filter((todo) => {
+  const filteredTodos: ToDo[] = useMemo(() => {
+    return todos.filter((todo: ToDo) => {
       const matchesText = todo.description
         .toLowerCase()
         .includes(searchText.toLowerCase());
       const matchesStatus =
         statusFilter === "all" || todo.status === statusFilter;
-      console.log("Tu sam...");
+
       return matchesText && matchesStatus;
     });
   }, [todos, searchText, statusFilter]);
@@ -28,6 +30,7 @@ const ToDoForm = () => {
       <h1 className="mx-auto py-2 mb-8 pt-16 font-semibold lg:text-4xl md:text-3xl text-2xl">
         TODO LIST
       </h1>
+
       <div className="flex flex-row justify-center gap-6 flex-wrap-reverse p-4">
         <ToDoFilter
           searchText={searchText}
@@ -35,6 +38,7 @@ const ToDoForm = () => {
           statusFilter={statusFilter}
           setStatusFilter={setStatusFilter}
         />
+
         <button
           className="bg-[var(--purple)] cursor-pointer rounded-md p-2 text-white hover:brightness-90"
           onClick={() => setDarkMode(!darkMode)}
@@ -46,6 +50,7 @@ const ToDoForm = () => {
           )}
         </button>
       </div>
+
       <div className="flex col gap-2 m-4 justify-center h-[60vh]">
         <ToDoList todos={filteredTodos} />
       </div>

@@ -1,6 +1,21 @@
 import React from "react";
+import { FilterStatusType } from "../types";
 
-const Tab = ({ setStatusFilter, text, color, value, isActive }) => {
+type TabProps = {
+  setStatusFilter: (value: FilterStatusType) => void;
+  text: string;
+  color: string;
+  value: FilterStatusType;
+  isActive: boolean;
+};
+
+const Tab: React.FC<TabProps> = ({
+  setStatusFilter,
+  text,
+  color,
+  value,
+  isActive,
+}) => {
   return (
     <div className="m-1 dark:text-[var(--black)]">
       <button

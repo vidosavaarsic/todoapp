@@ -3,11 +3,22 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import { useTodos } from "./ToDoContext";
 import ToDoItem from "./ToDoItem";
 import AddToDoForm from "./AddToDoForm";
-const ToDoList = ({ todos }) => {
+
+type ToDo = {
+  id: number;
+  description: string;
+  status: "ready" | "pending" | "done";
+};
+
+type ToDoListProps = {
+  todos: ToDo[];
+};
+
+const ToDoList: React.FC<ToDoListProps> = ({ todos }) => {
   const { addToDo } = useTodos();
 
-  const [addText, setAddText] = useState("");
-  const [isAdding, setIsAdding] = useState(false);
+  const [addText, setAddText] = useState<string>("");
+  const [isAdding, setIsAdding] = useState<boolean>(false);
 
   const handleAdd = () => {
     setIsAdding(true);
@@ -19,13 +30,14 @@ const ToDoList = ({ todos }) => {
   };
 
   const handleSaveAdd = () => {
+    if (addText.trim() === "") return;
     addToDo(addText);
     setAddText("");
     setIsAdding(false);
   };
 
   return (
-    <div className="dark:text-white]">
+    <div className="dark:text-white">
       {Array.isArray(todos) && todos.length > 0 ? (
         <ul>
           {todos.map((todo) => (
@@ -43,12 +55,15 @@ const ToDoList = ({ todos }) => {
           <p className="text-xl">Empty...</p>
         </div>
       )}
+
       <PlusIcon
         onClick={handleAdd}
         className="fixed bottom-12 right-12 bg-[var(--purple)] hover:brightness-90 text-white w-14 h-14 flex items-center justify-center text-center rounded-full text-3xl cursor-pointer z-50"
       />
+
       {isAdding && (
         <AddToDoForm
+          addText={addText}
           setAddText={setAddText}
           handleCancelAdd={handleCancelAdd}
           handleSaveAdd={handleSaveAdd}

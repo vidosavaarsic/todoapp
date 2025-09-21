@@ -1,20 +1,27 @@
 import React from "react";
 
-const EditToDoForm = ({
+type EditToDoFormProps = {
+  editText: string;
+  setEditText: (text: string) => void;
+  handleCancelEdit: () => void;
+  handleSaveEdit: () => void;
+};
+
+const EditToDoForm: React.FC<EditToDoFormProps> = ({
   editText,
   setEditText,
   handleCancelEdit,
   handleSaveEdit,
 }) => {
   return (
-    <div className="fixed inset-0  bg-opacity-50 flex items-center justify-center z-100">
+    <div className="fixed inset-0 bg-opacity-50 flex items-center justify-center z-[100]">
       <div className="p-6 rounded-xl shadow-lg w-[90%] max-w-md bg-white dark:bg-[var(--black)] dark:ring-1 dark:ring-[var(--white)]">
         <h2 className="text-xl font-semibold mb-4">EDIT NOTE</h2>
         <input
           type="text"
           value={editText}
           onChange={(e) => setEditText(e.target.value)}
-          className="w-full border border-[var(--purple)] dark:border-[var(--white)] rounded-md p-2 mb-4 focus:outline-none dark:bg-[var(--black)] "
+          className="w-full border border-[var(--purple)] dark:border-[var(--white)] rounded-md p-2 mb-4 focus:outline-none dark:bg-[var(--black)]"
         />
         <div className="flex justify-between mt-20">
           <button

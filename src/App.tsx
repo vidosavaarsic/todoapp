@@ -4,7 +4,7 @@ import ToDoForm from "./components/ToDoForm";
 import { ThemeProvider } from "./components/ThemeContext";
 import { ToDoProvider } from "./components/ToDoContext";
 
-function App() {
+const App = () => {
   return (
     <ThemeProvider>
       <div className="App min-h-screen bg-[var(--white)] dark:bg-[var(--black)] dark:text-[var(--white)]">
@@ -14,6 +14,6 @@ function App() {
       </div>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

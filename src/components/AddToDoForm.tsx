@@ -1,6 +1,13 @@
 import React from "react";
 
-const AddToDoForm = ({
+type AddToDoFormProps = {
+  addText?: string;
+  setAddText: (text: string) => void;
+  handleCancelAdd: () => void;
+  handleSaveAdd: () => void;
+};
+
+const AddToDoForm: React.FC<AddToDoFormProps> = ({
   addText,
   setAddText,
   handleCancelAdd,
@@ -14,13 +21,13 @@ const AddToDoForm = ({
           type="text"
           value={addText}
           onChange={(e) => setAddText(e.target.value)}
-          className="w-full border border-[var(--purple)] dark:border-[var(--white)]  rounded-md p-2 mb-4 focus:outline-none dark:bg-[var(--black)] "
+          className="w-full border border-[var(--purple)] dark:border-[var(--white)] rounded-md p-2 mb-4 focus:outline-none dark:bg-[var(--black)]"
           placeholder="Input your note..."
         />
         <div className="flex justify-between mt-20">
           <button
             onClick={handleCancelAdd}
-            className="bg-white hover:bg-gray-400 text-[var(--purple)] px-4 py-2 rounded-md ring-1 ring-[var(--purple)] font-semibold dark:bg-[var(--black)] "
+            className="bg-white hover:bg-gray-400 text-[var(--purple)] px-4 py-2 rounded-md ring-1 ring-[var(--purple)] font-semibold dark:bg-[var(--black)]"
           >
             CANCEL
           </button>
