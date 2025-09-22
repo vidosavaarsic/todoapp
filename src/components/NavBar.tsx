@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { useTheme } from "./ThemeContext";
+import "../styles/NavBar.css";
 
 const NavBar = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -26,33 +27,16 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div
-      style={{
-        borderBottom: "1px solid var(--purple)",
-        backgroundColor: darkMode ? "var(--black)" : "var(--white)",
-        textAlign: "left",
-        position: "relative",
-      }}
-    >
+    <div className={`navbar ${darkMode ? "dark" : ""}`}>
       {!isMobile &&
         (Array.isArray(navBarList) && navBarList.length > 0 ? (
-          <ol
-            style={{
-              display: "flex",
-            }}
-          >
+          <ol>
             {navBarList.map((nav, index) => (
               <button
                 key={index}
-                style={{
-                  width: "8rem",
-                  padding: "1rem",
-                  fontSize: "1.2rem",
-                  fontWeight: "700",
-                  backgroundColor: index === activeIndex ? "var(--purple)" : "",
-                  color: darkMode ? "var(--white)" : "var(--black)",
-                  transform: hoveredIndex === index ? "scale(1.1)" : "scale(1)",
-                }}
+                className={`nav-button ${hoveredIndex ? "hover" : ""}  ${
+                  activeIndex === index ? "active" : ""
+                }`}
                 onClick={() => handleClick(index)}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
@@ -67,58 +51,25 @@ const NavBar = () => {
       {isMobile && (
         <div
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          style={{
-            fontSize: "2.2rem",
-            textAlign: "right",
-            paddingRight: "1rem",
-            cursor: "pointer",
-            color: darkMode ? "var(--white)" : "var(--black)",
-          }}
+          className={`burger ${darkMode ? "dark" : ""}`}
         >
           ☰
         </div>
       )}
       {isMobile && isSidebarOpen && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "60%",
-            height: "100vh",
-            backgroundColor: darkMode ? "var(--black)" : "var(--white)",
-            boxShadow: "2px 0 5px rgba(0,0,0,0.2)",
-            padding: "0.1rem 1rem",
-            display: "flex",
-            flexDirection: "column",
-            gap: "1.5rem",
-            zIndex: 999,
-          }}
-        >
+        <div className={`sidebar ${darkMode ? "dark" : ""}`}>
           <div
             onClick={() => setIsSidebarOpen(false)}
-            style={{
-              alignSelf: "flex-end",
-              fontSize: "2rem",
-              cursor: "pointer",
-              color: darkMode ? "var(--white)" : "var(--black)",
-            }}
+            className={`sidebar-close ${darkMode ? "dark" : ""}`}
           >
             ×
           </div>
           {navBarList.map((nav, index) => (
             <button
               key={index}
-              style={{
-                padding: "1rem",
-                fontSize: "1.2rem",
-                backgroundColor:
-                  index === activeIndex ? "var(--purple)" : "transparent",
-                color: darkMode ? "var(--white)" : "var(--black)",
-                border: "none",
-                textAlign: "left",
-                cursor: "pointer",
-              }}
+              className={`nav-button ${darkMode ? "dark" : "light"} ${
+                index === activeIndex ? "active" : ""
+              }`}
               onClick={() => handleClick(index)}
             >
               {nav}
