@@ -17,6 +17,7 @@ const NavBar = () => {
   const handleClick = (index: number) => {
     setActiveIndex(index);
   };
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
