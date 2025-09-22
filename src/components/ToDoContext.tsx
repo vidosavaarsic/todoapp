@@ -75,7 +75,7 @@ export const ToDoProvider = ({ children }: ToDoProviderProps) => {
 export const useTodos = (): ToDoContextType => {
   const context = useContext(ToDoContext);
   if (!context) {
-    throw new Error("useTodos mora biti korišćen unutar ToDoProvider-a");
+    throw new Error("");
   }
   return context;
 };

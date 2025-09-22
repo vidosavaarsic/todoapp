@@ -49,7 +49,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 export const useTheme = (): ThemeContextType => {
   const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error("useTheme mora biti korišćen unutar ThemeProvider-a");
+    throw new Error("");
   }
   return context;
 };
