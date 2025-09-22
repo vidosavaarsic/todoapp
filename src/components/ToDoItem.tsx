@@ -50,13 +50,15 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
       <label className="flex items-center space-x-4 cursor-pointer py-4">
         <input
           type="checkbox"
-          className="peer hidden"
+          className="hidden peer"
           checked={todo.status === "done"}
           onChange={() => editStatus(todo.id)}
         />
         <div className="lg:w-8 lg:h-8 w-6 h-6 border border-[var(--purple)] rounded-sm flex items-center peer-checked:bg-[var(--purple)] text-white">
           <svg
-            className="w-8 h-8 text-white peer-checked:block"
+            className={`w-8 h-8 text-white peer-checked:inline ${
+              todo.status === "done" ? "" : "hidden"
+            }`}
             fill="none"
             stroke="currentColor"
             strokeWidth="3"
