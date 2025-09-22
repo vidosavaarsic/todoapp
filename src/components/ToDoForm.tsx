@@ -39,16 +39,22 @@ const ToDoForm: React.FC = () => {
           setStatusFilter={setStatusFilter}
         />
 
-        <button
-          className="bg-[var(--purple)] cursor-pointer rounded-md p-2 text-white hover:brightness-90"
-          onClick={() => setDarkMode(!darkMode)}
-        >
-          {darkMode ? (
-            <SunIcon className="h-6 w-8" />
-          ) : (
-            <MoonIcon className="h-6 w-8" />
-          )}
-        </button>
+        <label className="relative inline-flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            className="sr-only peer"
+            checked={darkMode}
+            onChange={() => setDarkMode(!darkMode)}
+          />
+          <div className="w-16 h-10 bg-gray-300 peer-focus:outline-none peer-focus:none rounded-full transition-colors duration-300"></div>
+          <span className="absolute left-1 top-1 lg:top-2 w-8 h-8 bg-white rounded-full transition-transform duration-300 peer-checked:translate-x-6 flex items-center justify-center text-[var(--purple)]">
+            {darkMode ? (
+              <SunIcon className="w-4 h-4" />
+            ) : (
+              <MoonIcon className="w-4 h-4" />
+            )}
+          </span>
+        </label>
       </div>
 
       <div className="flex col gap-2 m-4 justify-center h-[60vh]">
