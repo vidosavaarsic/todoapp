@@ -17,7 +17,7 @@ const ToDoFilter: React.FC<ToDoFilterProps> = ({
   setStatusFilter,
 }) => {
   return (
-    <div className="flex items-center gap-6 flex-wrap">
+    <div className="flex items-center gap-6 flex-wrap justify-center">
       <div className="relative">
         <MagnifyingGlassIcon className="h-6 w-6 absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--purple)] dark:text-[var(--white)]" />
         <input
