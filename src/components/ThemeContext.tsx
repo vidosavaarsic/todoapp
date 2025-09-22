@@ -1,6 +1,6 @@
 import {
   createContext,
-  useContext,
+  use,
   useEffect,
   useState,
   ReactNode,
@@ -47,7 +47,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 };
 
 export const useTheme = (): ThemeContextType => {
-  const context = useContext(ThemeContext);
+  const context = use(ThemeContext);
   if (!context) {
     throw new Error("");
   }

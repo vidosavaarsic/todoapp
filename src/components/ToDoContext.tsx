@@ -1,11 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { createContext, use, useState, ReactNode } from "react";
 
 type ToDo = {
   id: number;
@@ -73,7 +66,7 @@ export const ToDoProvider = ({ children }: ToDoProviderProps) => {
 };
 
 export const useTodos = (): ToDoContextType => {
-  const context = useContext(ToDoContext);
+  const context = use(ToDoContext);
   if (!context) {
     throw new Error("");
   }
