@@ -25,6 +25,14 @@ const ToDoForm: React.FC = () => {
     });
   }, [todos, searchText, statusFilter]);
 
+  const handleSetSearchText = (search: string) => {
+    setSearchText(search);
+  };
+
+  const handleStatusFilterChange = (status: FilterStatusType) => {
+    setStatusFilter(status);
+  };
+
   return (
     <div className="justify-center">
       <h1 className="mx-auto py-2 mb-8 pt-16 font-semibold lg:text-4xl md:text-3xl text-2xl">
@@ -34,9 +42,9 @@ const ToDoForm: React.FC = () => {
       <div className="flex flex-row justify-center gap-6 flex-wrap-reverse p-4">
         <ToDoFilter
           searchText={searchText}
-          setSearchText={setSearchText}
+          handleSetSearchText={handleSetSearchText}
           statusFilter={statusFilter}
-          setStatusFilter={setStatusFilter}
+          handleStatusFilterChange={handleStatusFilterChange}
         />
 
         <label className="relative inline-flex items-center cursor-pointer">
@@ -47,7 +55,7 @@ const ToDoForm: React.FC = () => {
             onChange={() => setDarkMode(!darkMode)}
           />
           <div className="w-16 h-10 bg-gray-300 peer-focus:outline-none peer-focus:none rounded-full transition-colors duration-300"></div>
-          <span className="absolute left-1 top-1 lg:top-2 w-8 h-8 bg-white rounded-full transition-transform duration-300 peer-checked:translate-x-6 flex items-center justify-center text-[var(--purple)]">
+          <span className="absolute left-1 top-1 lg:top-2 md:top-2 w-8 h-8 bg-white rounded-full transition-transform duration-300 peer-checked:translate-x-6 flex items-center justify-center text-[var(--purple)]">
             {darkMode ? (
               <SunIcon className="w-4 h-4" />
             ) : (

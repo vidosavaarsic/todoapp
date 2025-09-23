@@ -2,7 +2,7 @@ import React from "react";
 import { FilterStatusType } from "../types";
 
 type TabProps = {
-  setStatusFilter: (value: FilterStatusType) => void;
+  handleStatusFilterChange: (value: FilterStatusType) => void;
   text: string;
   color: string;
   value: FilterStatusType;
@@ -10,7 +10,7 @@ type TabProps = {
 };
 
 const Tab: React.FC<TabProps> = ({
-  setStatusFilter,
+  handleStatusFilterChange,
   text,
   color,
   value,
@@ -23,7 +23,7 @@ const Tab: React.FC<TabProps> = ({
         className={`p-2 w-20 ${
           isActive ? "ring-1 ring-[var(--purple)] hover:resize-x" : ""
         }`}
-        onClick={() => setStatusFilter(value)}
+        onClick={() => handleStatusFilterChange(value)}
       >
         {text}
       </button>

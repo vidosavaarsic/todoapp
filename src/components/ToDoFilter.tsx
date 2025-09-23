@@ -5,16 +5,16 @@ import { FilterStatusType } from "../types";
 
 type ToDoFilterProps = {
   searchText: string;
-  setSearchText: (value: string) => void;
+  handleSetSearchText: (value: string) => void;
   statusFilter: FilterStatusType;
-  setStatusFilter: (status: FilterStatusType) => void;
+  handleStatusFilterChange: (status: FilterStatusType) => void;
 };
 
 const ToDoFilter: React.FC<ToDoFilterProps> = ({
   searchText,
-  setSearchText,
+  handleSetSearchText,
   statusFilter,
-  setStatusFilter,
+  handleStatusFilterChange,
 }) => {
   return (
     <div className="flex items-center gap-6 flex-wrap justify-center">
@@ -24,35 +24,35 @@ const ToDoFilter: React.FC<ToDoFilterProps> = ({
           type="text"
           placeholder="Search note..."
           value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
+          onChange={(e) => handleSetSearchText(e.target.value)}
           className="px-3 py-2 border rounded-md text-sm focus:outline-none ring-1 ring-[var(--purple)] dark:ring-[var(--white)] bg-[var(--white)] dark:bg-[var(--black)] cursor-pointer text-[var(--purple)] dark:text-[var(--white)] w-80 lg:w-[40rem]"
         />
       </div>
 
       <div className="flex flex-row">
         <Tab
-          setStatusFilter={setStatusFilter}
+          handleStatusFilterChange={handleStatusFilterChange}
           text="All"
           color="#e0dbed"
           value="all"
           isActive={statusFilter === "all"}
         />
         <Tab
-          setStatusFilter={setStatusFilter}
+          handleStatusFilterChange={handleStatusFilterChange}
           text="Ready"
           color="#f0f0f0"
           value="ready"
           isActive={statusFilter === "ready"}
         />
         <Tab
-          setStatusFilter={setStatusFilter}
+          handleStatusFilterChange={handleStatusFilterChange}
           text="Pending"
           color="#ffffdd"
           value="pending"
           isActive={statusFilter === "pending"}
         />
         <Tab
-          setStatusFilter={setStatusFilter}
+          handleStatusFilterChange={handleStatusFilterChange}
           text="Done"
           color="#edf7ed"
           value="done"
