@@ -17,8 +17,8 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
   const { editStatus, deleteToDo, editDesc } = useTodos();
 
   const [editId, setEditId] = useState<number | null>(null);
-  const [editText, setEditText] = useState<string>("");
-  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [editText, setEditText] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleSaveEdit = () => {
     if (editId !== null) {

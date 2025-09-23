@@ -7,7 +7,7 @@ import { useTodos } from "./ToDoContext";
 import { FilterStatusType, ToDo } from "../types";
 
 const ToDoForm: React.FC = () => {
-  const [searchText, setSearchText] = useState<string>("");
+  const [searchText, setSearchText] = useState("");
   const [statusFilter, setStatusFilter] = useState<FilterStatusType>("all");
 
   const { darkMode, setDarkMode } = useTheme();

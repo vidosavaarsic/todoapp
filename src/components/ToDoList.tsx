@@ -17,8 +17,8 @@ type ToDoListProps = {
 const ToDoList: React.FC<ToDoListProps> = ({ todos }) => {
   const { addToDo } = useTodos();
 
-  const [addText, setAddText] = useState<string>("");
-  const [isAdding, setIsAdding] = useState<boolean>(false);
+  const [addText, setAddText] = useState("");
+  const [isAdding, setIsAdding] = useState(false);
 
   const handleAdd = () => {
     setIsAdding(true);
