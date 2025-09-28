@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { useTodos } from "./ToDoContext";
+import { useTodos } from "../_contexts/ToDoContext";
 import ToDoItem from "./ToDoItem";
-import AddToDoForm from "./AddToDoForm";
+import AddToDoForm from "../_forms/AddToDoForm";
 
 type ToDo = {
   id: number;

@@ -5,6 +5,8 @@
   --purple: #6c63ff;
   --black: #252525;
   --white: #f7f7f7;
+  --grey: #5c5c5c;
+  --lgrey: #aeaeae;
 }
 .App {
   text-align: center;

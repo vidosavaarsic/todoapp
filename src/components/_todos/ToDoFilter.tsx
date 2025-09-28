@@ -1,7 +1,7 @@
 import React from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import Tab from "./Tab";
-import { FilterStatusType } from "../types";
+import ToDoTab from "./ToDoTab";
+import { FilterStatusType } from "../../types";
 
 type ToDoFilterProps = {
   searchText: string;
@@ -30,28 +30,28 @@ const ToDoFilter: React.FC<ToDoFilterProps> = ({
       </div>
 
       <div className="flex flex-row">
-        <Tab
+        <ToDoTab
           handleStatusFilterChange={handleStatusFilterChange}
           text="All"
           color="#e0dbed"
           value="all"
           isActive={statusFilter === "all"}
         />
-        <Tab
+        <ToDoTab
           handleStatusFilterChange={handleStatusFilterChange}
           text="Ready"
           color="#f0f0f0"
           value="ready"
           isActive={statusFilter === "ready"}
         />
-        <Tab
+        <ToDoTab
           handleStatusFilterChange={handleStatusFilterChange}
           text="Pending"
           color="#ffffdd"
           value="pending"
           isActive={statusFilter === "pending"}
         />
-        <Tab
+        <ToDoTab
           handleStatusFilterChange={handleStatusFilterChange}
           text="Done"
           color="#edf7ed"

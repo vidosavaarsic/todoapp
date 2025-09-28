@@ -1,21 +1,38 @@
-import React, { useMemo, useState, useEffect } from "react";
-import { useTheme } from "./ThemeContext";
 import "../styles/NavBar.css";
+import React, { useMemo, useState, useEffect } from "react";
+import { useTheme } from "./_contexts/ThemeContext";
+import { Link } from "react-router-dom";
+import { useLogs } from "./_contexts/LogContext";
 
-const NavBar = () => {
+const NavBar: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const { darkMode } = useTheme();
+  const { log, setLog } = useLogs();
 
   const navBarList = useMemo(() => {
-    return ["Nav 1", "Nav 2", "Nav 3"];
-  }, []);
+    if (log) {
+      return [
+        { label: "To Do List", path: "/todos" },
+        { label: "Log out", path: "/" },
+      ];
+    } else {
+      return [
+        { label: "Login", path: "/" },
+        { label: "Register", path: "/register" },
+      ];
+    }
+  }, [log]);
 
-  const handleClick = (index: number) => {
+  const handleClick = (index: number, nav: string) => {
     setActiveIndex(index);
+    if (nav === "Log out") {
+      setLog(!log);
+      setActiveIndex(0);
+    }
   };
 
   useEffect(() => {
@@ -33,17 +50,19 @@ const NavBar = () => {
         (Array.isArray(navBarList) && navBarList.length > 0 ? (
           <ol>
             {navBarList.map((nav, index) => (
-              <button
-                key={index}
-                className={`nav-button ${hoveredIndex ? "hover" : ""}  ${
-                  activeIndex === index ? "active" : ""
-                }`}
-                onClick={() => handleClick(index)}
-                onMouseEnter={() => setHoveredIndex(index)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                {nav}
-              </button>
+              <Link to={nav.path} key={index}>
+                <button
+                  key={index}
+                  className={`nav-button ${hoveredIndex ? "hover" : ""}  ${
+                    activeIndex === index ? "active" : ""
+                  }`}
+                  onClick={() => handleClick(index, nav.label)}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  {nav.label}
+                </button>
+              </Link>
             ))}
           </ol>
         ) : (
@@ -66,15 +85,17 @@ const NavBar = () => {
             ×
           </div>
           {navBarList.map((nav, index) => (
-            <button
-              key={index}
-              className={`nav-button ${darkMode ? "dark" : "light"} ${
-                index === activeIndex ? "active" : ""
-              }`}
-              onClick={() => handleClick(index)}
-            >
-              {nav}
-            </button>
+            <Link to={nav.path} key={index}>
+              <button
+                key={index}
+                className={`nav-button ${darkMode ? "dark" : "light"} ${
+                  index === activeIndex ? "active" : ""
+                }`}
+                onClick={() => handleClick(index, nav.label)}
+              >
+                {nav.label}
+              </button>
+            </Link>
           ))}
         </div>
       )}

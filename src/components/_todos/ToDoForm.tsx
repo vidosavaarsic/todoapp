@@ -1,16 +1,14 @@
 import React, { useState, useMemo } from "react";
 import ToDoFilter from "./ToDoFilter";
 import ToDoList from "./ToDoList";
-import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
-import { useTheme } from "./ThemeContext";
-import { useTodos } from "./ToDoContext";
-import { FilterStatusType, ToDo } from "../types";
+import { useTodos } from "../_contexts/ToDoContext";
+import { FilterStatusType, ToDo } from "../../types";
+import ThemeChanger from "../ThemeChanger";
 
 const ToDoForm: React.FC = () => {
   const [searchText, setSearchText] = useState("");
   const [statusFilter, setStatusFilter] = useState<FilterStatusType>("all");
 
-  const { darkMode, setDarkMode } = useTheme();
   const { todos } = useTodos();
 
   const filteredTodos: ToDo[] = useMemo(() => {
@@ -46,23 +44,7 @@ const ToDoForm: React.FC = () => {
           statusFilter={statusFilter}
           handleStatusFilterChange={handleStatusFilterChange}
         />
-
-        <label className="relative inline-flex items-center cursor-pointer">
-          <input
-            type="checkbox"
-            className="sr-only peer"
-            checked={darkMode}
-            onChange={() => setDarkMode(!darkMode)}
-          />
-          <div className="w-16 h-10 bg-gray-300 peer-focus:outline-none peer-focus:none rounded-full transition-colors duration-300"></div>
-          <span className="absolute left-1 top-1 lg:top-2 md:top-2 w-8 h-8 bg-white rounded-full transition-transform duration-300 peer-checked:translate-x-6 flex items-center justify-center text-[var(--purple)]">
-            {darkMode ? (
-              <SunIcon className="w-4 h-4" />
-            ) : (
-              <MoonIcon className="w-4 h-4" />
-            )}
-          </span>
-        </label>
+        <ThemeChanger />
       </div>
 
       <div className="flex col gap-2 m-4 justify-center h-[60vh]">

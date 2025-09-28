@@ -1,5 +1,5 @@
 import React from "react";
-import { FilterStatusType } from "../types";
+import { FilterStatusType } from "../../types";
 
 type TabProps = {
   handleStatusFilterChange: (value: FilterStatusType) => void;
@@ -9,7 +9,7 @@ type TabProps = {
   isActive: boolean;
 };
 
-const Tab: React.FC<TabProps> = ({
+const ToDoTab: React.FC<TabProps> = ({
   handleStatusFilterChange,
   text,
   color,
@@ -31,4 +31,4 @@ const Tab: React.FC<TabProps> = ({
   );
 };
 
-export default Tab;
+export default ToDoTab;
