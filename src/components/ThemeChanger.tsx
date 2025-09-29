@@ -25,9 +25,9 @@ const ThemeChanger = () => {
           }`}
         >
           {darkMode ? (
-            <SunIcon className="w-4 h-4" />
-          ) : (
             <MoonIcon className="w-4 h-4" />
+          ) : (
+            <SunIcon className="w-4 h-4" />
           )}
         </span>
       </label>

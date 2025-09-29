@@ -6,7 +6,8 @@ import Login from "./Login";
 import { useLogs } from "./_contexts/LogContext";
 
 const Main = () => {
-  const log = useLogs();
+  const { log } = useLogs();
+
   return (
     <div className="App min-h-screen bg-[var(--white)] dark:bg-[var(--black)] dark:text-[var(--white)]">
       <Routes>
