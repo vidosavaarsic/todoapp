@@ -19,6 +19,7 @@ const NavBar: React.FC = () => {
   const navBarList = useMemo(() => {
     if (log) {
       return [
+        { label: "Profile", path: "/profile" },
         { label: "To Do List", path: "/todos" },
         { label: "Log out", path: "/" },
       ];
@@ -31,11 +32,9 @@ const NavBar: React.FC = () => {
   }, [log]);
 
   const handleClick = (index: number, nav: string, path: string) => {
-    setActiveIndex(index);
-
     if (nav === "Log out") {
       setLog(false);
-      navigate("/");
+      navigate("/", { replace: true });
     } else {
       navigate(path);
     }

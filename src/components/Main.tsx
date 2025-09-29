@@ -4,6 +4,7 @@ import ToDoForm from "./_todos/ToDoForm";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import { useLogs } from "./_contexts/LogContext";
+import Profile from "./Profile";
 
 const Main = () => {
   const { log } = useLogs();
@@ -23,8 +24,15 @@ const Main = () => {
             )
           }
         />
-        <Route path="/" element={<Login />} />
+        <Route
+          path="/"
+          element={!log ? <Login /> : <Navigate to="/profile" replace />}
+        />
         <Route path="/register" element={<Register />} />
+        <Route
+          path="/profile"
+          element={log ? <Profile /> : <Navigate to="/" replace />}
+        />
       </Routes>
     </div>
   );

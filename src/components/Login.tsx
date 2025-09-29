@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useLogs } from "./_contexts/LogContext";
 import ThemeChanger from "./ThemeChanger";
 import { useTheme } from "./_contexts/ThemeContext";
@@ -9,7 +9,6 @@ const Login = () => {
   const { darkMode } = useTheme();
 
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -21,10 +20,10 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (log && location.pathname === "/") {
-      navigate("/todos");
+    if (log) {
+      navigate("/profile", { replace: true });
     }
-  }, [log, navigate, location.pathname]);
+  }, [log, navigate]);
 
   return (
     <div className="formPage">
