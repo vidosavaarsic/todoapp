@@ -35,6 +35,7 @@ const Login = () => {
         <input
           type="email"
           id="email"
+          name="email"
           className={`inputInForm ${darkMode ? "dark" : ""}`}
         />
 
@@ -42,6 +43,7 @@ const Login = () => {
         <input
           type="password"
           id="password"
+          name="password"
           className={`inputInForm ${darkMode ? "dark" : ""}`}
         />
 

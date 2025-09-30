@@ -23,6 +23,7 @@ const Register = () => {
         <input
           type="text"
           id="fname"
+          name="fname"
           className={`inputInForm ${darkMode ? "dark" : ""}`}
         />
 
@@ -30,6 +31,7 @@ const Register = () => {
         <input
           type="text"
           id="lname"
+          name="lname"
           className={`inputInForm ${darkMode ? "dark" : ""}`}
         />
 
@@ -37,6 +39,7 @@ const Register = () => {
         <input
           type="email"
           id="email"
+          name="email"
           className={`inputInForm ${darkMode ? "dark" : ""}`}
         />
 
@@ -44,6 +47,7 @@ const Register = () => {
         <input
           type="password"
           id="password"
+          name="password"
           className={`inputInForm ${darkMode ? "dark" : ""}`}
         />
 

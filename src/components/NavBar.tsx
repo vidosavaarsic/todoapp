@@ -1,7 +1,7 @@
 import "../styles/NavBar.css";
 import React, { useMemo, useState, useEffect } from "react";
 import { useTheme } from "./_contexts/ThemeContext";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useLogs } from "./_contexts/LogContext";
 
 const NavBar: React.FC = () => {
@@ -11,9 +11,8 @@ const NavBar: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const { darkMode } = useTheme();
-  const { log, setLog } = useLogs();
+  const { log } = useLogs();
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   const navBarList = useMemo(() => {
@@ -21,7 +20,6 @@ const NavBar: React.FC = () => {
       return [
         { label: "Profile", path: "/profile" },
         { label: "To Do List", path: "/todos" },
-        { label: "Log out", path: "/" },
       ];
     } else {
       return [
@@ -31,21 +29,12 @@ const NavBar: React.FC = () => {
     }
   }, [log]);
 
-  const handleClick = (index: number, nav: string, path: string) => {
-    if (nav === "Log out") {
-      setLog(false);
-      navigate("/", { replace: true });
-    } else {
-      navigate(path);
-    }
-  };
-
   useEffect(() => {
     const index = navBarList.findIndex((nav) => nav.path === location.pathname);
     if (index !== -1) {
       setActiveIndex(index);
     }
-  }, [location.pathname, navBarList]);
+  }, [location.pathname, navBarList, log]);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -58,26 +47,25 @@ const NavBar: React.FC = () => {
 
   return (
     <div className={`navbar ${darkMode ? "dark" : ""}`}>
-      {!isMobile &&
-        (Array.isArray(navBarList) && navBarList.length > 0 ? (
-          <ol>
-            {navBarList.map((nav, index) => (
-              <button
-                key={index}
+      {!isMobile && (
+        <ol>
+          {navBarList.map((nav, index) => (
+            <li key={index}>
+              <Link
+                to={nav.path}
+                preventScrollReset={true}
                 className={`nav-button ${hoveredIndex ? "hover" : ""}  ${
                   activeIndex === index ? "active" : ""
                 }`}
-                onClick={() => handleClick(index, nav.label, nav.path)}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 {nav.label}
-              </button>
-            ))}
-          </ol>
-        ) : (
-          <div></div>
-        ))}
+              </Link>
+            </li>
+          ))}
+        </ol>
+      )}
       {isMobile && (
         <div
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -94,17 +82,20 @@ const NavBar: React.FC = () => {
           >
             ×
           </div>
-          {navBarList.map((nav, index) => (
-            <button
-              key={index}
-              className={`nav-button ${darkMode ? "dark" : "light"} ${
-                index === activeIndex ? "active" : ""
-              }`}
-              onClick={() => handleClick(index, nav.label, nav.path)}
-            >
-              {nav.label}
-            </button>
-          ))}
+          <ol className="flex flex-col">
+            {navBarList.map((nav, index) => (
+              <li key={index}>
+                <Link
+                  to={nav.path}
+                  className={`nav-button ${darkMode ? "dark" : "light"} ${
+                    index === activeIndex ? "active" : ""
+                  }`}
+                >
+                  {nav.label}
+                </Link>
+              </li>
+            ))}
+          </ol>
         </div>
       )}
     </div>

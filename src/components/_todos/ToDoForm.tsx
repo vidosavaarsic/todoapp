@@ -47,7 +47,7 @@ const ToDoForm: React.FC = () => {
         <ThemeChanger />
       </div>
 
-      <div className="flex col gap-2 m-4 justify-center h-[60vh]">
+      <div className="flex flex-col gap-2 m-4 items-center">
         <ToDoList todos={filteredTodos} />
       </div>
     </div>

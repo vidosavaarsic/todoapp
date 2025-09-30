@@ -42,18 +42,17 @@
 
 .title {
   font-size: xx-large;
+  padding-top: 5rem;
 }
 .formPage {
-  padding-top: 5rem;
   justify-items: center;
+  margin: 0;
 }
 .form {
-  margin: 2rem;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 30em;
 }
 .inputInForm {
   border: 1px solid var(--purple);
@@ -68,6 +67,7 @@
 }
 .inputInForm:focus {
   outline: none;
+  background-color: transparent;
 }
 .submitInForm {
   border: 1px solid var(--purple);
