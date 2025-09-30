@@ -62,8 +62,15 @@
   padding: 0.5rem;
   background-color: transparent;
 }
-.inputInForm.dark {
-  border-color: var(--white);
+.inputInForm.dark:-webkit-autofill {
+  box-shadow: 0 0 0 30px var(--black) inset !important;
+  -webkit-text-fill-color: var(--white) !important;
+}
+.inputInForm:invalid {
+  border: 1px dashed var(--purple);
+}
+.inputInForm:valid {
+  border: 1px solid var(--purple);
 }
 .inputInForm:focus {
   outline: none;

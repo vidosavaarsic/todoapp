@@ -1,16 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import ThemeChanger from "./ThemeChanger";
 import { useTheme } from "./_contexts/ThemeContext";
 
 const Register = () => {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   const { darkMode } = useTheme();
 
-  const handleRegister = () => {
-    console.log("Registration done.");
-  };
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Prevent default submit");
+
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match.");
+    } else {
+      setErrorMessage("");
+      console.log("Form submitted successfully!");
+      // Submit logic here
+    }
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    if (errorMessage && e.target.value === confirmPassword) {
+      setErrorMessage("");
+    }
+  };
+
+  const handleConfirmPasswordChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setConfirmPassword(e.target.value);
+    if (errorMessage && password === e.target.value) {
+      setErrorMessage("");
+    }
   };
 
   return (
@@ -25,6 +49,7 @@ const Register = () => {
           id="fname"
           name="fname"
           className={`inputInForm ${darkMode ? "dark" : ""}`}
+          required
         />
 
         <label htmlFor="lname"> Last Name </label>
@@ -33,6 +58,7 @@ const Register = () => {
           id="lname"
           name="lname"
           className={`inputInForm ${darkMode ? "dark" : ""}`}
+          required
         />
 
         <label htmlFor="email"> Your Email </label>
@@ -41,6 +67,7 @@ const Register = () => {
           id="email"
           name="email"
           className={`inputInForm ${darkMode ? "dark" : ""}`}
+          required
         />
 
         <label htmlFor="password"> Password </label>
@@ -48,12 +75,26 @@ const Register = () => {
           type="password"
           id="password"
           name="password"
+          value={password}
+          onChange={handlePasswordChange}
           className={`inputInForm ${darkMode ? "dark" : ""}`}
+          required
         />
 
-        <button className="submitInForm" onClick={() => handleRegister()}>
-          submit
-        </button>
+        <label htmlFor="confirmPass"> Confirm Password </label>
+        <input
+          type="password"
+          id="confirmPass"
+          name="confirmPass"
+          value={confirmPassword}
+          onChange={handleConfirmPasswordChange}
+          className={`inputInForm ${darkMode ? "dark" : ""}`}
+          required
+        />
+        {errorMessage && (
+          <p className="text-red-500">Passwords do not match!</p>
+        )}
+        <button className="submitInForm">Submit</button>
       </form>
     </div>
   );

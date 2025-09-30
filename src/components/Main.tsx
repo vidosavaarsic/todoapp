@@ -28,7 +28,10 @@ const Main = () => {
           path="/"
           element={!log ? <Login /> : <Navigate to="/profile" replace />}
         />
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/register"
+          element={!log ? <Register /> : <Navigate to="/profile" replace />}
+        />
         <Route
           path="/profile"
           element={log ? <Profile /> : <Navigate to="/" replace />}

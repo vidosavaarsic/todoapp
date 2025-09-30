@@ -30,13 +30,14 @@ const Login = () => {
       <h1 className="title">Login</h1>
       <br />
       <ThemeChanger />
-      <form className={`form`} onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="email"> Your Email </label>
         <input
           type="email"
           id="email"
           name="email"
           className={`inputInForm ${darkMode ? "dark" : ""}`}
+          required
         />
 
         <label htmlFor="password"> Password </label>
@@ -45,9 +46,11 @@ const Login = () => {
           id="password"
           name="password"
           className={`inputInForm ${darkMode ? "dark" : ""}`}
+          required
+          pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).+$"
         />
 
-        <button className="submitInForm">submit</button>
+        <button className="submitInForm">Submit</button>
       </form>
     </div>
   );
