@@ -1,18 +1,18 @@
 import React, { useState, useMemo } from "react";
 import ToDoFilter from "./ToDoFilter";
 import ToDoList from "./ToDoList";
-import { useTodos } from "../_contexts/ToDoContext";
-import { FilterStatusType, ToDo } from "../../types";
+import useMainStore from "../../store/useMainStore";
+import { FilterStatusType, ToDoItem } from "../../types";
 import ThemeChanger from "../ThemeChanger";
 
 const ToDoForm: React.FC = () => {
   const [searchText, setSearchText] = useState("");
   const [statusFilter, setStatusFilter] = useState<FilterStatusType>("all");
 
-  const { todos } = useTodos();
+  const todos = useMainStore.use.toDoList();
 
-  const filteredTodos: ToDo[] = useMemo(() => {
-    return todos.filter((todo: ToDo) => {
+  const filteredTodos: ToDoItem[] = useMemo(() => {
+    return todos.filter((todo: ToDoItem) => {
       const matchesText = todo.description
         .toLowerCase()
         .includes(searchText.toLowerCase());

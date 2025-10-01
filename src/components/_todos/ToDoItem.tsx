@@ -2,15 +2,10 @@ import React, { useState } from "react";
 import { useTodos } from "../_contexts/ToDoContext";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import EditToDoForm from "../_forms/EditToDoForm";
-
-type ToDo = {
-  id: number;
-  description: string;
-  status: "ready" | "done" | "pending";
-};
+import { ToDoItem as ToDoItemType } from "../../types";
 
 type ToDoItemProps = {
-  todo: ToDo;
+  todo: ToDoItemType;
 };
 
 const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {

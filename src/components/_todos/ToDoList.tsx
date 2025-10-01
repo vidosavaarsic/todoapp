@@ -1,24 +1,19 @@
 import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { useTodos } from "../_contexts/ToDoContext";
+import useMainStore from "../../store/useMainStore";
 import ToDoItem from "./ToDoItem";
 import AddToDoForm from "../_forms/AddToDoForm";
-
-type ToDo = {
-  id: number;
-  description: string;
-  status: "ready" | "pending" | "done";
-};
+import { ToDoItem as ToDoItemType } from "../../types";
 
 type ToDoListProps = {
-  todos: ToDo[];
+  todos: ToDoItemType[];
 };
 
 const ToDoList: React.FC<ToDoListProps> = ({ todos }) => {
-  const { addToDo } = useTodos();
-
   const [addText, setAddText] = useState("");
   const [isAdding, setIsAdding] = useState(false);
+
+  const addToList = useMainStore.use.addToList();
 
   const handleAdd = () => {
     setIsAdding(true);
@@ -31,7 +26,7 @@ const ToDoList: React.FC<ToDoListProps> = ({ todos }) => {
 
   const handleSaveAdd = () => {
     if (addText.trim() === "") return;
-    addToDo(addText);
+    addToList({ id: Date.now(), description: addText, status: "pending" });
     setAddText("");
     setIsAdding(false);
   };
