@@ -35,6 +35,7 @@
   border: none;
   cursor: pointer;
   transition: transform 0.2s ease;
+  text-align: center;
 }
 
 .nav-button.active {
@@ -42,7 +43,7 @@
 }
 
 .nav-button:hover {
-  transform: scale(1.1);
+  background-color: var(--orange);
 }
 
 .burger {
@@ -87,16 +88,6 @@
   color: var(--white);
 }
 
-.navbar ol {
+.navbar nav {
   display: flex;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.navbar ol a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
