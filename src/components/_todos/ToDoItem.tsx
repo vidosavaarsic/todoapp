@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { useTodos } from "../_contexts/ToDoContext";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import EditToDoForm from "../_forms/EditToDoForm";
 import { ToDoItem as ToDoItemType } from "../../types";
+import useMainStore from "../../store/useMainStore";
 
 type ToDoItemProps = {
   todo: ToDoItemType;
 };
 
 const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
-  const { editStatus, deleteToDo, editDesc } = useTodos();
+  const editToDoDesc = useMainStore.use.editToDoDesc();
+  const completeToDo = useMainStore.use.completeToDo();
+  const deleteToDo = useMainStore.use.deleteToDo();
 
   const [editId, setEditId] = useState<number | null>(null);
   const [editText, setEditText] = useState("");
@@ -17,7 +19,7 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
 
   const handleSaveEdit = () => {
     if (editId !== null) {
-      editDesc(editId, editText);
+      editToDoDesc(editId, editText);
       setIsEditing(false);
       setEditId(null);
       setEditText("");
@@ -47,7 +49,7 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
           type="checkbox"
           className="hidden peer"
           checked={todo.status === "done"}
-          onChange={() => editStatus(todo.id)}
+          onChange={() => completeToDo(todo.id)}
         />
         <div className="lg:w-8 lg:h-8 w-6 h-6 border border-[var(--purple)] rounded-sm flex items-center peer-checked:bg-[var(--purple)] text-white">
           <svg

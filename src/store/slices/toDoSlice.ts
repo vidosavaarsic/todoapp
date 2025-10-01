@@ -36,11 +36,23 @@ export const createToDoSlice: CreateToDoSlice = (set) => {
         toDoList: [...state.toDoList, newItem],
       }));
     },
-    // TODO: implement this function.
-    completeToDo: () => set((state) => state),
-    // TODO: implement this function.
-    editToDoDesc: () => set((state) => state),
-    // TODO: implement this function.
-    deleteToDo: () => set((state) => state),
+    completeToDo: (id: number) =>
+      set((state) => ({
+        toDoList: state.toDoList.map((todo) =>
+          todo.id === id
+            ? { ...todo, status: todo.status === "done" ? "pending" : "done" }
+            : todo
+        ),
+      })),
+    editToDoDesc: (id: number, desc: string) =>
+      set((state) => ({
+        toDoList: state.toDoList.map((todo) =>
+          todo.id === id ? { ...todo, description: desc } : todo
+        ),
+      })),
+    deleteToDo: (id: number) =>
+      set((state) => ({
+        toDoList: state.toDoList.filter((todo) => todo.id !== id),
+      })),
   };
 };
