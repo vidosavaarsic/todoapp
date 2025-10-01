@@ -21,12 +21,12 @@ const NavBar: React.FC = () => {
         { label: "Profile", path: "/profile" },
         { label: "To Do List", path: "/todos" },
       ];
-    } else {
-      return [
-        { label: "Login", path: "/" },
-        { label: "Register", path: "/register" },
-      ];
     }
+    
+    return [
+      { label: "Login", path: "/" },
+      { label: "Register", path: "/register" },
+    ];
   }, [log]);
 
   useEffect(() => {

@@ -9,34 +9,34 @@ import Profile from "./Profile";
 const Main = () => {
   const { log } = useLogs();
 
+  const loggedRoutes = (
+    <>
+      <Route
+        path="/todos"
+        element={
+          <ToDoProvider>
+            <ToDoForm />
+          </ToDoProvider>
+        }
+      />
+      <Route path="/" element={<Navigate to="/profile" replace />} />
+      <Route path="/register" element={<Navigate to="/profile" replace />} />
+      <Route path="/profile" element={<Profile />} />
+    </>
+  );
+
+  const loggedOutRoutes = (
+    <>
+      <Route path="/todos" element={<Navigate to="/" />} />
+      <Route path="/" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/profile" element={<Navigate to="/" replace />} />
+    </>
+  );
+
   return (
     <div className="App min-h-screen bg-[var(--white)] dark:bg-[var(--black)] dark:text-[var(--white)]">
-      <Routes>
-        <Route
-          path="/todos"
-          element={
-            log ? (
-              <ToDoProvider>
-                <ToDoForm />
-              </ToDoProvider>
-            ) : (
-              <Navigate to="/" />
-            )
-          }
-        />
-        <Route
-          path="/"
-          element={!log ? <Login /> : <Navigate to="/profile" replace />}
-        />
-        <Route
-          path="/register"
-          element={!log ? <Register /> : <Navigate to="/profile" replace />}
-        />
-        <Route
-          path="/profile"
-          element={log ? <Profile /> : <Navigate to="/" replace />}
-        />
-      </Routes>
+      <Routes>{log ? loggedRoutes : loggedOutRoutes}</Routes>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { useTheme } from "./_contexts/ThemeContext";
 const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const { darkMode } = useTheme();
 
@@ -13,18 +13,20 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match.");
-    } else {
-      setErrorMessage("");
-      console.log("Form submitted successfully!");
-      // Submit logic here
+      setErrorMessage(true);
+
+      return;
     }
+
+    setErrorMessage(false);
+    console.log("Form submitted successfully!");
+    // Submit logic here
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-    if (errorMessage && e.target.value === confirmPassword) {
-      setErrorMessage("");
+    if (errorMessage && confirmPassword === e.target.value) {
+      setErrorMessage(false);
     }
   };
 
@@ -33,7 +35,7 @@ const Register = () => {
   ) => {
     setConfirmPassword(e.target.value);
     if (errorMessage && password === e.target.value) {
-      setErrorMessage("");
+      setErrorMessage(false);
     }
   };
 
@@ -50,6 +52,7 @@ const Register = () => {
           name="fname"
           className={`inputInForm ${darkMode ? "dark" : ""}`}
           required
+          title="Please enter your first name"
         />
 
         <label htmlFor="lname"> Last Name </label>
@@ -79,6 +82,9 @@ const Register = () => {
           onChange={handlePasswordChange}
           className={`inputInForm ${darkMode ? "dark" : ""}`}
           required
+          pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).+$"
+          minLength={6}
+          maxLength={20}
         />
 
         <label htmlFor="confirmPass"> Confirm Password </label>
@@ -90,6 +96,9 @@ const Register = () => {
           onChange={handleConfirmPasswordChange}
           className={`inputInForm ${darkMode ? "dark" : ""}`}
           required
+          pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).+$"
+          minLength={6}
+          maxLength={20}
         />
         {errorMessage && (
           <p className="text-red-500">Passwords do not match!</p>

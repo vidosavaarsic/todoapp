@@ -14,7 +14,6 @@ const Login = () => {
     e.preventDefault();
     console.log("Prevent default submit");
     if (true) {
-      //validation true
       setLog(true);
     }
   };
@@ -48,6 +47,8 @@ const Login = () => {
           className={`inputInForm ${darkMode ? "dark" : ""}`}
           required
           pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).+$"
+          minLength={6}
+          maxLength={20}
         />
 
         <button className="submitInForm">Submit</button>
