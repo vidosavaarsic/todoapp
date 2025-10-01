@@ -1,13 +1,8 @@
 import { createContext, use, useState, ReactNode } from "react";
-
-type ToDo = {
-  id: number;
-  description: string;
-  status: "ready" | "done" | "pending";
-};
+import { ToDoItem } from "../../types";
 
 type ToDoContextType = {
-  todos: ToDo[];
+  todos: ToDoItem[];
   addToDo: (desc: string) => void;
   editStatus: (id: number) => void;
   editDesc: (id: number, desc: string) => void;
@@ -21,7 +16,7 @@ type ToDoProviderProps = {
 };
 
 export const ToDoProvider = ({ children }: ToDoProviderProps) => {
-  const [todos, setTodos] = useState<ToDo[]>([
+  const [todos, setTodos] = useState<ToDoItem[]>([
     { id: 1, description: "NOTE #1", status: "ready" },
     { id: 2, description: "NOTE #2", status: "done" },
     { id: 3, description: "NOTE #3", status: "pending" },
