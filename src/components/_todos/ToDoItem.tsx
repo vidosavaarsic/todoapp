@@ -9,13 +9,13 @@ type ToDoItemProps = {
 };
 
 const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
-  const editToDoDesc = useMainStore.use.editToDoDesc();
-  const completeToDo = useMainStore.use.completeToDo();
-  const deleteToDo = useMainStore.use.deleteToDo();
-
   const [editId, setEditId] = useState<number | null>(null);
   const [editText, setEditText] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+
+  const editToDoDesc = useMainStore.use.editToDoDesc();
+  const completeToDo = useMainStore.use.completeToDo();
+  const deleteToDo = useMainStore.use.deleteToDo();
 
   const handleSaveEdit = () => {
     if (editId !== null) {
