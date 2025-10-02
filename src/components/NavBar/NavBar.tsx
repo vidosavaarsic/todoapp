@@ -73,7 +73,11 @@ const NavBar: React.FC = () => {
             <NavLink
               key={nav.path}
               to={nav.path}
-              className={`nav-button ${darkMode ? "dark" : "light"}`}
+              className={classNames(
+                "nav-button",
+                { dark: darkMode },
+                { light: !darkMode }
+              )}
             >
               {nav.label}
             </NavLink>

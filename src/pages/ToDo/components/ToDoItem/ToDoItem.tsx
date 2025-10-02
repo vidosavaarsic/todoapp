@@ -8,6 +8,7 @@ import EditToDoForm from "../../_forms/EditToDoForm";
 import { ToDoItem as ToDoItemType } from "../../../../types";
 import useMainStore from "../../../../store/useMainStore";
 import { useNavigate } from "react-router-dom";
+import classNames from "classnames";
 
 type ToDoItemProps = {
   todo: ToDoItemType;
@@ -51,9 +52,10 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
 
   return (
     <div
-      className={`flex flex-row justify-between gap-6 items-center w-80 lg:w-[50rem] ${
-        todo.status === "done" ? "border-b border-t border-[var(--purple)]" : ""
-      }`}
+      className={classNames(
+        "flex flex-row justify-between gap-6 items-center w-80 lg:w-[50rem] ",
+        { "border-b border-t border-[var(--purple)]": todo.status === "done" }
+      )}
     >
       <label className="flex items-center space-x-4 cursor-pointer py-4">
         <input
@@ -64,9 +66,9 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
         />
         <div className="lg:w-8 lg:h-8 w-6 h-6 border border-[var(--purple)] rounded-sm flex items-center peer-checked:bg-[var(--purple)] text-white">
           <svg
-            className={`w-8 h-8 text-white peer-checked:inline ${
-              todo.status === "done" ? "" : "hidden"
-            }`}
+            className={classNames("w-8 h-8 text-white peer-checked:inline ", {
+              hidden: todo.status !== "done",
+            })}
             fill="none"
             stroke="currentColor"
             strokeWidth="3"
@@ -76,11 +78,13 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
           </svg>
         </div>
         <strong
-          className={`text-xl md:text-2xl lg:text-3xl font-semibold text-left ${
-            todo.status === "done"
-              ? "line-through text-gray-400"
-              : "dark:text-[var(--white)]"
-          }`}
+          className={classNames(
+            "text-xl md:text-2xl lg:text-3xl font-semibold text-left",
+            {
+              "line-through text-gray-400": todo.status === "done",
+            },
+            { "dark:text-[var(--white)]": todo.status !== "done" }
+          )}
         >
           {todo.description}
         </strong>
