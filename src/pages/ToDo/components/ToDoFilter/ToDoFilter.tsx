@@ -1,7 +1,7 @@
 import React from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import ToDoTab from "./ToDoTab";
-import { FilterStatusType } from "../../types";
+import ToDoTab from "../ToDoTab/ToDoTab";
+import { FilterStatusType } from "../../../../types";
 
 type ToDoFilterProps = {
   searchText: string;

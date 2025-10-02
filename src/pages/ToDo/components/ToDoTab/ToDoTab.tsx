@@ -1,5 +1,5 @@
 import React from "react";
-import { FilterStatusType } from "../../types";
+import { FilterStatusType } from "../../../../types";
 
 type TabProps = {
   handleStatusFilterChange: (value: FilterStatusType) => void;

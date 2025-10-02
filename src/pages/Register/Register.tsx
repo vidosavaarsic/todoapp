@@ -1,6 +1,7 @@
+import classNames from "classnames";
 import React, { useState } from "react";
-import ThemeChanger from "./ThemeChanger";
-import { useTheme } from "./_contexts/ThemeContext";
+import ThemeChanger from "../../ThemeChanger";
+import { useTheme } from "../../context/ThemeContext";
 
 const Register = () => {
   const [password, setPassword] = useState("");
@@ -50,7 +51,7 @@ const Register = () => {
           type="text"
           id="fname"
           name="fname"
-          className={`inputInForm ${darkMode ? "dark" : ""}`}
+          className={classNames("inputInForm", { dark: darkMode })}
           required
           title="Please enter your first name"
         />
@@ -60,7 +61,7 @@ const Register = () => {
           type="text"
           id="lname"
           name="lname"
-          className={`inputInForm ${darkMode ? "dark" : ""}`}
+          className={classNames("inputInForm", { dark: darkMode })}
           required
         />
 
@@ -69,7 +70,7 @@ const Register = () => {
           type="email"
           id="email"
           name="email"
-          className={`inputInForm ${darkMode ? "dark" : ""}`}
+          className={classNames("inputInForm", { dark: darkMode })}
           required
         />
 
@@ -80,7 +81,7 @@ const Register = () => {
           name="password"
           value={password}
           onChange={handlePasswordChange}
-          className={`inputInForm ${darkMode ? "dark" : ""}`}
+          className={classNames("inputInForm", { dark: darkMode })}
           required
           pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).+$"
           minLength={6}
@@ -94,7 +95,7 @@ const Register = () => {
           name="confirmPass"
           value={confirmPassword}
           onChange={handleConfirmPasswordChange}
-          className={`inputInForm ${darkMode ? "dark" : ""}`}
+          className={classNames("inputInForm", { dark: darkMode })}
           required
           pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).+$"
           minLength={6}

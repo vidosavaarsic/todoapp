@@ -1,7 +1,7 @@
-import "../../styles/ItemPage.css";
 import React from "react";
 import useMainStore from "../../store/useMainStore";
 import { useParams } from "react-router-dom";
+import "./ItemPage.css";
 
 const ToDoItemPage = () => {
   const { id } = useParams<{ id: string }>();

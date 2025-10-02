@@ -35,6 +35,7 @@
   cursor: pointer;
   transition: transform 0.2s ease;
   text-align: center;
+  flex-wrap: wrap;
 }
 
 .nav-button.active {

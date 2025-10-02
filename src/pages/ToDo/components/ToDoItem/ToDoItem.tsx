@@ -4,9 +4,9 @@ import {
   TrashIcon,
   ArrowsPointingOutIcon,
 } from "@heroicons/react/24/outline";
-import EditToDoForm from "../_forms/EditToDoForm";
-import { ToDoItem as ToDoItemType } from "../../types";
-import useMainStore from "../../store/useMainStore";
+import EditToDoForm from "../../_forms/EditToDoForm";
+import { ToDoItem as ToDoItemType } from "../../../../types";
+import useMainStore from "../../../../store/useMainStore";
 import { useNavigate } from "react-router-dom";
 
 type ToDoItemProps = {

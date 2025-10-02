@@ -1,11 +1,11 @@
-import { ToDoProvider } from "./_contexts/ToDoContext";
-import Register from "./Register";
-import ToDoForm from "./_todos/ToDoForm";
+import { ToDoProvider } from "./context/ToDoContext";
+import Register from "./pages/Register/Register";
+import ToDoForm from "./pages/ToDo/ToDoForm";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Login from "./Login";
-import { useLogs } from "./_contexts/LogContext";
-import Profile from "./Profile";
-import ToDoItemPage from "./_todos/ToDoItemPage";
+import Login from "./pages/Login/Login";
+import { useLogs } from "./context/LogContext";
+import Profile from "./components/Profile";
+import ToDoItemPage from "./pages/ToDoItem/ToDoItemPage";
 
 const Main = () => {
   const { log } = useLogs();
