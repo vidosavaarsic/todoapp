@@ -7,3 +7,8 @@ export type ToDoItem = {
   description: string;
   status: ToDoStatusType;
 };
+
+export type AuthUser = {
+  id: string;
+  name: string;
+};
