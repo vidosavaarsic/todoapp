@@ -17,6 +17,7 @@ const NavBar: React.FC = () => {
       return [
         { label: "Profile", path: "/profile" },
         { label: "To Do List", path: "/todos" },
+        { label: "History", path: "/history" },
       ];
     }
 

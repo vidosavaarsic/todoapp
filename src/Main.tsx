@@ -7,6 +7,7 @@ import Profile from "./components/Profile";
 import ToDoItemPage from "./pages/ToDoItem/ToDoItemPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useLogs } from "./context/LogContext";
+import History from "./pages/History/History";
 
 const Main = () => {
   const { log } = useLogs();
@@ -28,6 +29,7 @@ const Main = () => {
           />
           <Route path="/todos/:id" element={<ToDoItemPage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/history" element={<History />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

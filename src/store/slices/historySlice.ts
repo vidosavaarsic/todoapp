@@ -9,6 +9,7 @@ export type HistoryState = {
 
 export type HistoryActions = {
   addToHistory: (newItem: ToDoItem) => void;
+  getAllToDoHistory: () => void;
 };
 
 export type HistorySlice = HistoryState & HistoryActions;
@@ -19,12 +20,15 @@ const initialHistoryState: HistoryState = {
 
 type CreateHistorySlice = StateCreator<Store, [], [], HistorySlice>;
 
-export const createHistorySlice: CreateHistorySlice = (set) => {
+export const createHistorySlice: CreateHistorySlice = (set, get) => {
   resetter.addResetter(() => set(initialHistoryState));
 
   return {
     ...initialHistoryState,
-    // TODO: implement this function.
-    addToHistory: () => set((state) => state),
+    addToHistory: (newItem: ToDoItem) =>
+      set((state) => ({ history: [...state.history, newItem] })),
+    getAllToDoHistory: () => {
+      return get().history;
+    },
   };
 };
