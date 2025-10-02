@@ -7,13 +7,16 @@ const ToDoItemPage = () => {
   const { id } = useParams<{ id: string }>();
   const getToDoById = useMainStore.use.getToDoById();
 
-  const todo = id ? getToDoById(Number(id)) : null;
+  if (!id) return <div>Invalid route.</div>;
+  const todo = getToDoById(+id);
+
+  if (!todo) return <div>ToDo with {id} was not found</div>;
 
   return (
     <div className="formPage">
-      <h1 className="title">{todo?.description}</h1>
+      <h1 className="title">{todo.description}</h1>
       <article>
-        <p>{todo?.status}</p>
+        <p>{todo.status}</p>
       </article>
     </div>
   );
