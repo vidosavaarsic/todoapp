@@ -12,6 +12,7 @@ export type ToDoActions = {
   completeToDo: (id: number) => void;
   editToDoDesc: (id: number, desc: string) => void;
   deleteToDo: (id: number) => void;
+  getToDoById: (id: number) => ToDoItem | undefined;
 };
 
 export type ToDoSlice = ToDoState & ToDoActions;
@@ -26,7 +27,7 @@ const initialToDoState: ToDoState = {
 
 type CreateToDoSlice = StateCreator<Store, [], [], ToDoSlice>;
 
-export const createToDoSlice: CreateToDoSlice = (set) => {
+export const createToDoSlice: CreateToDoSlice = (set, get) => {
   resetter.addResetter(() => set(initialToDoState));
 
   return {
@@ -54,5 +55,8 @@ export const createToDoSlice: CreateToDoSlice = (set) => {
       set((state) => ({
         toDoList: state.toDoList.filter((todo) => todo.id !== id),
       })),
+    getToDoById: (id: number) => {
+      return get().toDoList.find((todo) => todo.id === id);
+    },
   };
 };

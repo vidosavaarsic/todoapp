@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
+import {
+  PencilIcon,
+  TrashIcon,
+  ArrowsPointingOutIcon,
+} from "@heroicons/react/24/outline";
 import EditToDoForm from "../_forms/EditToDoForm";
 import { ToDoItem as ToDoItemType } from "../../types";
 import useMainStore from "../../store/useMainStore";
+import { useNavigate } from "react-router-dom";
 
 type ToDoItemProps = {
   todo: ToDoItemType;
@@ -16,6 +21,8 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
   const [editId, setEditId] = useState<number | null>(null);
   const [editText, setEditText] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSaveEdit = () => {
     if (editId !== null) {
@@ -36,6 +43,10 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
     setEditId(id);
     setEditText(currentText);
     setIsEditing(true);
+  };
+
+  const handleOpenToDoItem = (id: number) => {
+    navigate(`${id}`);
   };
 
   return (
@@ -76,6 +87,10 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
       </label>
 
       <div className="flex flex-row gap-2">
+        <ArrowsPointingOutIcon
+          className="w-6 h-6 cursor-pointer hover:scale-90"
+          onClick={() => handleOpenToDoItem(todo.id)}
+        />
         <PencilIcon
           className="w-6 h-6 text-gray-400 cursor-pointer hover:text-[var(--purple)]"
           onClick={() => handleEdit(todo.id, todo.description)}
