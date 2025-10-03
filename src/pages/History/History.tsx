@@ -1,38 +1,29 @@
 import React from "react";
 import useMainStore from "../../store/useMainStore";
 import classNames from "classnames";
+import { CheckBadgeIcon } from "@heroicons/react/24/outline";
 
 const History = () => {
-  const deleteAllToDoHistory = useMainStore.use.deleteAllToDoHistory();
   const todoHistory = useMainStore.use.history();
-
-  const handleDeleteAllToDoHistory = () => {
-    deleteAllToDoHistory();
-  };
 
   return (
     <div>
-      <div className="title">History</div>
-      <button
-        onClick={handleDeleteAllToDoHistory}
-        className="bg-[var(--white)] hover:bg-[var(--lgrey)] dark:bg-[var(--black)] text-[var(--red)] font-semibold px-4 py-2 rounded-md ring-1 ring-[var(--red)]"
-      >
-        Delete History
-      </button>
+      <div className="title">Archive of Completed Tasks</div>
       <div className="flex mt-20">
         <ul
           className={classNames(
-            "flex flex-col gap-8 items-center w-full text-4xl text-left"
+            "flex flex-col gap-8 items-center w-full text-2xl text-left"
           )}
         >
           {todoHistory.map((todo, index) => (
             <li
               key={index}
               className={classNames({
-                "border-b border-t border-[var(--purple)] lg:w-1/2 w-80 p-4":
+                "flex flex-row items-center gap-4 border-b border-t border-[var(--purple)] lg:w-1/2 w-80 p-4":
                   todo.status === "done",
               })}
             >
+              <CheckBadgeIcon className="w-12 h-12 text-green-500" />
               <div>{todo.description}</div>
             </li>
           ))}
