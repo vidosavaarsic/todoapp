@@ -20,6 +20,7 @@ const useStoreBase = create<Store>()(
       partialize: (state) => ({
         toDoList: state.toDoList,
         history: state.history,
+        toDoListBE: state.toDoListBE,
       }),
     }
   )
