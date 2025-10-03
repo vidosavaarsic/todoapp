@@ -40,7 +40,7 @@ const ToDoList: React.FC<ToDoListProps> = ({ todos }) => {
               key={todo.id}
               className="flex items-center justify-between py-2"
             >
-              <ToDoItem todo={todo} history={false} readonly={false} />
+              <ToDoItem todo={todo} />
             </li>
           ))}
         </ul>

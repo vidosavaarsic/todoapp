@@ -17,7 +17,7 @@ const History = () => {
         >
           {todoHistory.map((todo, index) => (
             <li key={index}>
-              <ToDoItem todo={todo} history={true} readonly={true} />
+              <ToDoItem todo={todo} history={true} />
             </li>
           ))}
         </ul>

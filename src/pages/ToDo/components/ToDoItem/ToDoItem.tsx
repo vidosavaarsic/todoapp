@@ -12,11 +12,10 @@ import classNames from "classnames";
 
 type ToDoItemProps = {
   todo: ToDoItemType;
-  history: boolean;
-  readonly: boolean;
+  history?: boolean;
 };
 
-const ToDoItem: React.FC<ToDoItemProps> = ({ todo, history, readonly }) => {
+const ToDoItem: React.FC<ToDoItemProps> = ({ todo, history }) => {
   const [editId, setEditId] = useState<number | null>(null);
   const [editText, setEditText] = useState("");
   const [isEditing, setIsEditing] = useState(false);
@@ -82,7 +81,7 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo, history, readonly }) => {
           className="hidden peer"
           checked={todo.status === "done"}
           onChange={() => handleCompleteToDo(todo.id)}
-          disabled={readonly}
+          disabled={history}
         />
         <div className="lg:w-8 lg:h-8 w-6 h-6 border border-[var(--purple)] rounded-sm flex items-center peer-checked:bg-[var(--purple)] text-white">
           <svg
