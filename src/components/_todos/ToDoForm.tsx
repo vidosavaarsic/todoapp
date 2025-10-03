@@ -4,12 +4,25 @@ import ToDoList from "./ToDoList";
 import useMainStore from "../../store/useMainStore";
 import { FilterStatusType, ToDoItem } from "../../types";
 import ThemeChanger from "../ThemeChanger";
+// import { useQuery } from "@tanstack/react-query";
+// import { fetchTodos } from "../../api/mockTodoDb";
 
 const ToDoForm: React.FC = () => {
   const [searchText, setSearchText] = useState("");
   const [statusFilter, setStatusFilter] = useState<FilterStatusType>("all");
 
   const todos = useMainStore.use.toDoList();
+
+  // TODO: Implementirati prvobitno pribavljanje liste preko api poziva.
+  // const {
+  //   data: todosBE,
+  //   isLoading,
+  //   isError,
+  // } = useQuery<ToDoItem[], Error>({
+  //   queryKey: ["todosBE"],
+  //   // queryFn predstavlja mock api poziva.
+  //   queryFn: fetchTodos,
+  // });
 
   const filteredTodos: ToDoItem[] = useMemo(() => {
     return todos.filter((todo: ToDoItem) => {
