@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLogs } from "./_contexts/LogContext";
-import ThemeChanger from "./ThemeChanger";
-import { useTheme } from "./_contexts/ThemeContext";
+import { useLogs } from "../../context/LogContext";
+import ThemeChanger from "../../ThemeChanger";
+import { useTheme } from "../../context/ThemeContext";
+import classNames from "classnames";
 
 const Login = () => {
   const { log, setLog } = useLogs();
@@ -35,7 +36,7 @@ const Login = () => {
           type="email"
           id="email"
           name="email"
-          className={`inputInForm ${darkMode ? "dark" : ""}`}
+          className={classNames("inputInForm", { dark: darkMode })}
           required
         />
 
@@ -44,7 +45,7 @@ const Login = () => {
           type="password"
           id="password"
           name="password"
-          className={`inputInForm ${darkMode ? "dark" : ""}`}
+          className={classNames("inputInForm", { dark: darkMode })}
           required
           pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).+$"
           minLength={6}

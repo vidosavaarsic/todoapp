@@ -15,7 +15,7 @@ const AddToDoForm: React.FC<AddToDoFormProps> = ({
 }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-xl shadow-lg w-[90%] max-w-md dark:bg-[var(--black)] dark:ring-1 dark:ring-[var(--white)]">
+      <div className="bg-[var(--white)] p-6 rounded-xl shadow-lg w-[90%] max-w-md dark:bg-[var(--black)] dark:ring-1 dark:ring-[var(--white)]">
         <h2 className="text-xl font-semibold mb-4">NEW NOTE</h2>
         <input
           type="text"
@@ -27,7 +27,7 @@ const AddToDoForm: React.FC<AddToDoFormProps> = ({
         <div className="flex justify-between mt-20">
           <button
             onClick={handleCancelAdd}
-            className="bg-white hover:bg-gray-400 text-[var(--purple)] px-4 py-2 rounded-md ring-1 ring-[var(--purple)] font-semibold dark:bg-[var(--black)]"
+            className="bg-[var(--white)] hover:bg-gray-400 text-[var(--purple)] px-4 py-2 rounded-md ring-1 ring-[var(--purple)] font-semibold dark:bg-[var(--black)]"
           >
             CANCEL
           </button>

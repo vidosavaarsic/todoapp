@@ -1,9 +1,9 @@
 import "./App.css";
-import NavBar from "./components/NavBar";
-import { ThemeProvider } from "./components/_contexts/ThemeContext";
+import NavBar from "./components/NavBar/NavBar";
+import { ThemeProvider } from "./context/ThemeContext";
 import { BrowserRouter as Router } from "react-router-dom";
-import { LogProvider } from "./components/_contexts/LogContext";
-import Main from "./components/Main";
+import { LogProvider } from "./context/LogContext";
+import Main from "./Main";
 
 const App = () => {
   return (

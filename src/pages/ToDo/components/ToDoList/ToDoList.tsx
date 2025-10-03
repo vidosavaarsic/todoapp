@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import useMainStore from "../../store/useMainStore";
-import ToDoItem from "./ToDoItem";
-import AddToDoForm from "../_forms/AddToDoForm";
-import { ToDoItem as ToDoItemType } from "../../types";
+import useMainStore from "../../../../store/useMainStore";
+import ToDoItem from "../ToDoItem/ToDoItem";
+import AddToDoForm from "../../_forms/AddToDoForm";
+import { ToDoItem as ToDoItemType } from "../../../../types";
 
 type ToDoListProps = {
   todos: ToDoItemType[];

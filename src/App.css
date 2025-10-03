@@ -8,6 +8,7 @@
   --white: #f7f7f7;
   --grey: #5c5c5c;
   --lgrey: #aeaeae;
+  --red: #d10000;
 }
 .App {
   text-align: center;
@@ -44,6 +45,7 @@
 .title {
   font-size: xx-large;
   padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 .formPage {
   justify-items: center;

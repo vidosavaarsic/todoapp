@@ -1,8 +1,9 @@
-import "../styles/NavBar.css";
+import "./NavBar.css";
 import React, { useMemo, useState, useEffect } from "react";
-import { useTheme } from "./_contexts/ThemeContext";
+import { useTheme } from "../../context/ThemeContext";
 import { NavLink } from "react-router-dom";
-import { useLogs } from "./_contexts/LogContext";
+import { useLogs } from "../../context/LogContext";
+import classNames from "classnames";
 
 const NavBar: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -16,6 +17,7 @@ const NavBar: React.FC = () => {
       return [
         { label: "Profile", path: "/profile" },
         { label: "To Do List", path: "/todos" },
+        { label: "History", path: "/history" },
       ];
     }
 
@@ -35,20 +37,20 @@ const NavBar: React.FC = () => {
   }, []);
 
   return (
-    <div className={`navbar ${darkMode ? "dark" : ""}`}>
+    <div className={classNames("navbar", { dark: darkMode })}>
       {isMobile ? (
         <>
           <div
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className={`burger ${darkMode ? "dark" : ""}`}
+            className={classNames("burger", { dark: darkMode })}
           >
             ☰
           </div>
           {isSidebarOpen && (
-            <div className={`sidebar ${darkMode ? "dark" : ""}`}>
+            <div className={classNames("sidebar", { dark: darkMode })}>
               <div
                 onClick={() => setIsSidebarOpen(false)}
-                className={`sidebar-close ${darkMode ? "dark" : ""}`}
+                className={classNames("sidebar-close", { dark: darkMode })}
               >
                 ×
               </div>
@@ -57,7 +59,7 @@ const NavBar: React.FC = () => {
                   <NavLink
                     key={nav.path}
                     to={nav.path}
-                    className={`nav-button ${darkMode ? "dark" : "light"}`}
+                    className={classNames("nav-button", { dark: darkMode })}
                   >
                     {nav.label}
                   </NavLink>
@@ -72,7 +74,11 @@ const NavBar: React.FC = () => {
             <NavLink
               key={nav.path}
               to={nav.path}
-              className={`nav-button ${darkMode ? "dark" : "light"}`}
+              className={classNames(
+                "nav-button",
+                { dark: darkMode },
+                { light: !darkMode }
+              )}
             >
               {nav.label}
             </NavLink>

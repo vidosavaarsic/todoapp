@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from "react";
-import ToDoFilter from "./ToDoFilter";
-import ToDoList from "./ToDoList";
+import ToDoFilter from "./components/ToDoFilter/ToDoFilter";
+import ToDoList from "./components/ToDoList/ToDoList";
 import useMainStore from "../../store/useMainStore";
 import { FilterStatusType, ToDoItem } from "../../types";
-import ThemeChanger from "../ThemeChanger";
+import ThemeChanger from "../../ThemeChanger";
 
 const ToDoForm: React.FC = () => {
   const [searchText, setSearchText] = useState("");
