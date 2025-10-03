@@ -1,7 +1,7 @@
 import useMainStore from "../store/useMainStore";
 import { ToDoItem } from "../types";
 
-const MOCK_DELAY = 1000;
+const MOCK_DELAY = 2000;
 
 export async function fetchTodos(): Promise<ToDoItem[]> {
   console.log("Mock DB: Fetching current ToDoList from Zustand...");

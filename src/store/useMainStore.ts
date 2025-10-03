@@ -18,7 +18,6 @@ const useStoreBase = create<Store>()(
     {
       name: "todo-store",
       partialize: (state) => ({
-        toDoList: state.toDoList,
         history: state.history,
         toDoListBE: state.toDoListBE,
       }),
