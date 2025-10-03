@@ -20,6 +20,7 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
   const deleteToDo = useMainStore.use.deleteToDo();
   const addToHistory = useMainStore.use.addToHistory();
   const getToDoById = useMainStore.use.getToDoById();
+  const deleteOneFromHistory = useMainStore.use.deleteOneFromHistory();
 
   const [editId, setEditId] = useState<number | null>(null);
   const [editText, setEditText] = useState("");
@@ -61,6 +62,8 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
 
     if (todo.status === "done") {
       addToHistory(todo);
+    } else {
+      deleteOneFromHistory(todo.id);
     }
   };
 

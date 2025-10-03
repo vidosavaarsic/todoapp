@@ -11,6 +11,7 @@ export type HistoryActions = {
   addToHistory: (newItem: ToDoItem) => void;
   getAllToDoHistory: () => ToDoItem[];
   deleteAllToDoHistory: () => void;
+  deleteOneFromHistory: (id: number) => void;
 };
 
 export type HistorySlice = HistoryState & HistoryActions;
@@ -32,5 +33,9 @@ export const createHistorySlice: CreateHistorySlice = (set, get) => {
       return get().history;
     },
     deleteAllToDoHistory: () => set({ history: [] }),
+    deleteOneFromHistory: (id: number) =>
+      set((state) => ({
+        history: state.history.filter((todo) => todo.id !== id),
+      })),
   };
 };
