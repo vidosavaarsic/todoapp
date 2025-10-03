@@ -12,19 +12,21 @@ import classNames from "classnames";
 
 type ToDoItemProps = {
   todo: ToDoItemType;
+  history: boolean;
+  readonly: boolean;
 };
 
-const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
+const ToDoItem: React.FC<ToDoItemProps> = ({ todo, history, readonly }) => {
+  const [editId, setEditId] = useState<number | null>(null);
+  const [editText, setEditText] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+
   const editToDoDesc = useMainStore.use.editToDoDesc();
   const completeToDo = useMainStore.use.completeToDo();
   const deleteToDo = useMainStore.use.deleteToDo();
   const addToHistory = useMainStore.use.addToHistory();
   const getToDoById = useMainStore.use.getToDoById();
   const deleteOneFromHistory = useMainStore.use.deleteOneFromHistory();
-
-  const [editId, setEditId] = useState<number | null>(null);
-  const [editText, setEditText] = useState("");
-  const [isEditing, setIsEditing] = useState(false);
 
   const navigate = useNavigate();
 
@@ -50,7 +52,7 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
   };
 
   const handleOpenToDoItem = (id: number) => {
-    navigate(`${id}`);
+    navigate(`/todos/${id}`);
   };
 
   const handleCompleteToDo = (id: number) => {
@@ -80,6 +82,7 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
           className="hidden peer"
           checked={todo.status === "done"}
           onChange={() => handleCompleteToDo(todo.id)}
+          disabled={readonly}
         />
         <div className="lg:w-8 lg:h-8 w-6 h-6 border border-[var(--purple)] rounded-sm flex items-center peer-checked:bg-[var(--purple)] text-white">
           <svg
@@ -112,14 +115,18 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
           className="w-6 h-6 cursor-pointer hover:scale-90"
           onClick={() => handleOpenToDoItem(todo.id)}
         />
-        <PencilIcon
-          className="w-6 h-6 text-gray-400 cursor-pointer hover:text-[var(--purple)]"
-          onClick={() => handleEdit(todo.id, todo.description)}
-        />
-        <TrashIcon
-          className="w-6 h-6 text-gray-400 cursor-pointer hover:text-red-500"
-          onClick={() => deleteToDo(todo.id)}
-        />
+        {!history && (
+          <div className="flex flex-row">
+            <PencilIcon
+              className="w-6 h-6 text-gray-400 cursor-pointer hover:text-[var(--purple)]"
+              onClick={() => handleEdit(todo.id, todo.description)}
+            />
+            <TrashIcon
+              className="w-6 h-6 text-gray-400 cursor-pointer hover:text-red-500"
+              onClick={() => deleteToDo(todo.id)}
+            />
+          </div>
+        )}
       </div>
 
       {isEditing && (

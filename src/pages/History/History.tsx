@@ -1,7 +1,7 @@
 import React from "react";
 import useMainStore from "../../store/useMainStore";
 import classNames from "classnames";
-import { CheckBadgeIcon } from "@heroicons/react/24/outline";
+import ToDoItem from "../ToDo/components/ToDoItem/ToDoItem";
 
 const History = () => {
   const todoHistory = useMainStore.use.history();
@@ -16,15 +16,8 @@ const History = () => {
           )}
         >
           {todoHistory.map((todo, index) => (
-            <li
-              key={index}
-              className={classNames({
-                "flex flex-row items-center gap-4 border-b border-t border-[var(--purple)] lg:w-1/2 w-80 p-4":
-                  todo.status === "done",
-              })}
-            >
-              <CheckBadgeIcon className="w-12 h-12 text-green-500" />
-              <div>{todo.description}</div>
+            <li key={index}>
+              <ToDoItem todo={todo} history={true} readonly={true} />
             </li>
           ))}
         </ul>

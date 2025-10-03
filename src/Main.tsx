@@ -6,19 +6,16 @@ import Login from "./pages/Login/Login";
 import Profile from "./components/Profile";
 import ToDoItemPage from "./pages/ToDoItem/ToDoItemPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { useLogs } from "./context/LogContext";
 import History from "./pages/History/History";
 
 const Main = () => {
-  const { log } = useLogs();
-
   return (
     <div className="App min-h-screen bg-[var(--white)] dark:bg-[var(--black)] dark:text-[var(--white)]">
       <Routes>
         <Route index element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        <Route element={<ProtectedRoute user={log} />}>
+        <Route element={<ProtectedRoute />}>
           <Route
             path="/todos"
             element={

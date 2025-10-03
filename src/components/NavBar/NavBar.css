@@ -73,6 +73,11 @@
   z-index: 999;
 }
 
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+}
+
 .sidebar.dark {
   background-color: var(--black);
 }

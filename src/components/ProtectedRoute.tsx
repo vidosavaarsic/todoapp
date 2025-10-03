@@ -1,17 +1,18 @@
 import { Navigate, Outlet } from "react-router-dom";
+import { useLogs } from "../context/LogContext";
 
 type ProtectedRouteProps = {
-  user: Boolean | null;
   redirectPath?: string;
   children?: React.ReactNode;
 };
 
 const ProtectedRoute = ({
-  user,
   redirectPath = "/",
   children,
 }: ProtectedRouteProps) => {
-  if (!user) {
+  const { log } = useLogs();
+
+  if (!log) {
     return <Navigate to={redirectPath} replace />;
   }
 
