@@ -1,20 +1,42 @@
 import React from "react";
 import useMainStore from "../../store/useMainStore";
+import classNames from "classnames";
 
 const History = () => {
-  const addToHistory = useMainStore.use.addToHistory();
-  const getAllToDoHistory = useMainStore.use.getAllToDoHistory();
+  const deleteAllToDoHistory = useMainStore.use.deleteAllToDoHistory();
+  const todoHistory = useMainStore.use.history();
 
-  const handleAddToHistory = () => {
-    addToHistory({ id: 4, description: "string", status: "done" });
-    console.log(getAllToDoHistory());
+  const handleDeleteAllToDoHistory = () => {
+    deleteAllToDoHistory();
   };
 
   return (
     <div>
-      <div>History</div>
-      <div>
-        <button onClick={handleAddToHistory}>Dodajjj</button>
+      <div className="title">History</div>
+      <button
+        onClick={handleDeleteAllToDoHistory}
+        className="bg-[var(--white)] hover:bg-[var(--lgrey)] dark:bg-[var(--black)] text-[var(--red)] font-semibold px-4 py-2 rounded-md ring-1 ring-[var(--red)]"
+      >
+        Delete History
+      </button>
+      <div className="flex mt-20">
+        <ul
+          className={classNames(
+            "flex flex-col gap-8 items-center w-full text-4xl text-left"
+          )}
+        >
+          {todoHistory.map((todo, index) => (
+            <li
+              key={index}
+              className={classNames({
+                "border-b border-t border-[var(--purple)] lg:w-1/2 w-80 p-4":
+                  todo.status === "done",
+              })}
+            >
+              <div>{todo.description}</div>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

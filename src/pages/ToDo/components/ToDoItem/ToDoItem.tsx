@@ -18,6 +18,8 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
   const editToDoDesc = useMainStore.use.editToDoDesc();
   const completeToDo = useMainStore.use.completeToDo();
   const deleteToDo = useMainStore.use.deleteToDo();
+  const addToHistory = useMainStore.use.addToHistory();
+  const getToDoById = useMainStore.use.getToDoById();
 
   const [editId, setEditId] = useState<number | null>(null);
   const [editText, setEditText] = useState("");
@@ -50,6 +52,18 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
     navigate(`${id}`);
   };
 
+  const handleCompleteToDo = (id: number) => {
+    completeToDo(id);
+
+    if (!id) return <p></p>;
+    const todo = getToDoById(+id);
+    if (!todo) return <div>ToDo with {id} was not found</div>;
+
+    if (todo.status === "done") {
+      addToHistory(todo);
+    }
+  };
+
   return (
     <div
       className={classNames(
@@ -62,7 +76,7 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo }) => {
           type="checkbox"
           className="hidden peer"
           checked={todo.status === "done"}
-          onChange={() => completeToDo(todo.id)}
+          onChange={() => handleCompleteToDo(todo.id)}
         />
         <div className="lg:w-8 lg:h-8 w-6 h-6 border border-[var(--purple)] rounded-sm flex items-center peer-checked:bg-[var(--purple)] text-white">
           <svg
