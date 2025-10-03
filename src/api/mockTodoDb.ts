@@ -18,7 +18,7 @@ export async function uploadTodoList(newList: ToDoItem[]) {
 
   await new Promise((resolve) => setTimeout(resolve, MOCK_DELAY));
 
-  const setToDoList = useMainStore.getState().setToDoList;
+  const setToDoList = useMainStore.getState().setToDoListBE;
 
   setToDoList(newList);
 }

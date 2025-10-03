@@ -5,7 +5,6 @@ import resetter from "../resetter";
 
 export type ToDoState = {
   toDoList: ToDoItem[];
-  toDoListBE: ToDoItem[];
 };
 
 export type ToDoActions = {
@@ -14,7 +13,6 @@ export type ToDoActions = {
   editToDoDesc: (id: number, desc: string) => void;
   deleteToDo: (id: number) => void;
   getToDoById: (id: number) => ToDoItem | undefined;
-  setToDoList: (newList: ToDoItem[]) => void;
 };
 
 export type ToDoSlice = ToDoState & ToDoActions;
@@ -24,11 +22,6 @@ const initialToDoState: ToDoState = {
     { id: 1, description: "NOTE #1", status: "ready" },
     { id: 2, description: "NOTE #2", status: "done" },
     { id: 3, description: "NOTE #3", status: "pending" },
-  ],
-  toDoListBE: [
-    { id: 4, description: "NOTE #4", status: "ready" },
-    { id: 5, description: "NOTE #5", status: "done" },
-    { id: 6, description: "NOTE #6", status: "pending" },
   ],
 };
 
@@ -65,6 +58,5 @@ export const createToDoSlice: CreateToDoSlice = (set, get) => {
     getToDoById: (id: number) => {
       return get().toDoList.find((todo) => todo.id === id);
     },
-    setToDoList: (newList: ToDoItem[]) => set({ toDoListBE: newList }),
   };
 };

@@ -4,14 +4,16 @@ import { ToDoSlice, createToDoSlice } from "./slices/toDoSlice";
 import { HistorySlice, createHistorySlice } from "./slices/historySlice";
 import resetter from "./resetter";
 import createSelectors from "./createSelectors";
+import { BackendSlice, createBackendSlice } from "./slices/backendSlice";
 
-export type Store = ToDoSlice & HistorySlice;
+export type Store = ToDoSlice & HistorySlice & BackendSlice;
 
 const useStoreBase = create<Store>()(
   persist(
     (...args) => ({
       ...createToDoSlice(...args),
       ...createHistorySlice(...args),
+      ...createBackendSlice(...args),
     }),
     {
       name: "todo-store",
