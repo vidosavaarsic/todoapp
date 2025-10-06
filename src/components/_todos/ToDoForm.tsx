@@ -4,8 +4,8 @@ import ToDoList from "./ToDoList";
 import useMainStore from "../../store/useMainStore";
 import { FilterStatusType, ToDoItem } from "../../types";
 import ThemeChanger from "../ThemeChanger";
-import { useQuery } from "@tanstack/react-query";
-import { fetchTodos } from "../../api/mockTodoDb";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { fetchTodos, uploadTodoList } from "../../api/mockTodoDb";
 
 const ToDoForm: React.FC = () => {
   const [searchText, setSearchText] = useState("");
@@ -21,6 +21,18 @@ const ToDoForm: React.FC = () => {
   } = useQuery<ToDoItem[], Error>({
     queryKey: ["todosBE"],
     queryFn: fetchTodos,
+    refetchOnWindowFocus: false,
+  });
+
+  const uploadMutation = useMutation({
+    mutationFn: uploadTodoList,
+    onSuccess: () => {
+      alert("Todos successfully saved!");
+      console.log("Success!");
+    },
+    onError: () => {
+      alert("Failed to saved todos.");
+    },
   });
 
   const filteredTodos: ToDoItem[] = useMemo(() => {
@@ -46,10 +58,11 @@ const ToDoForm: React.FC = () => {
   };
 
   useEffect(() => {
-    if (todosBE) {
+    if (todosBE && todos.length === 0) {
       addAllList(todosBE);
     }
-  }, [todosBE, addAllList]);
+  }, [todosBE, todos.length, addAllList]);
+
   if (isLoading) return <div className="text-center p-4">Loading todos...</div>;
   if (isError)
     return (
@@ -75,6 +88,13 @@ const ToDoForm: React.FC = () => {
       <div className="flex flex-col gap-2 m-4 items-center">
         <ToDoList todos={filteredTodos} />
       </div>
+      <button
+        onClick={() => uploadMutation.mutate(todos)}
+        disabled={uploadMutation.isPending}
+        className="mt-4 px-6 py-2 bg-[var(--purple)] text-white rounded-lg hover:brightness-110 disabled:opacity-50"
+      >
+        {uploadMutation.isPending ? "Uploading..." : "Save All Changes."}
+      </button>
     </div>
   );
 };
