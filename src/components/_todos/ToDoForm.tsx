@@ -14,17 +14,22 @@ const ToDoForm: React.FC = () => {
   const todos = useMainStore.use.toDoList();
   const addAllList = useMainStore.use.addAllToDos();
 
-  const {
-    data: todosBE,
-    isLoading,
-    isError,
-  } = useQuery<ToDoItem[], Error>({
+
+
+  const { isLoading, isError } = useQuery<ToDoItem[], Error>({
     queryKey: ["todosBE"],
-    queryFn: fetchTodos,
+    queryFn: async () => {
+      const todosBE = await fetchTodos();
+
+      // onSuccess.
+      addAllList(todosBE);
+
+      return todosBE;
+    },
     refetchOnWindowFocus: false,
   });
 
-  const uploadMutation = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: uploadTodoList,
     onSuccess: () => {
       alert("Todos successfully saved!");
@@ -57,16 +62,22 @@ const ToDoForm: React.FC = () => {
     setStatusFilter(status);
   };
 
-  useEffect(() => {
-    if (todosBE && todos.length === 0) {
-      addAllList(todosBE);
-    }
-  }, [todosBE, todos.length, addAllList]);
+  if (isLoading)
+    return (
+      <div className="text-center p-4">
+        <h1 className="mx-auto py-2 mb-8 pt-16 font-semibold lg:text-4xl md:text-3xl text-2xl">
+          Loading...
+        </h1>
+      </div>
+    );
 
-  if (isLoading) return <div className="text-center p-4">Loading todos...</div>;
   if (isError)
     return (
-      <div className="text-center p-4 text-red-500">Failed to load todos.</div>
+      <div className="text-center p-4 text-red-500">
+        <h1 className="mx-auto py-2 mb-8 pt-16 font-semibold lg:text-4xl md:text-3xl text-2xl">
+          Failed to load todos.
+        </h1>
+      </div>
     );
 
   return (
@@ -89,11 +100,11 @@ const ToDoForm: React.FC = () => {
         <ToDoList todos={filteredTodos} />
       </div>
       <button
-        onClick={() => uploadMutation.mutate(todos)}
-        disabled={uploadMutation.isPending}
+        onClick={() => mutate(todos)}
+        disabled={isPending}
         className="mt-4 px-6 py-2 bg-[var(--purple)] text-white rounded-lg hover:brightness-110 disabled:opacity-50"
       >
-        {uploadMutation.isPending ? "Uploading..." : "Save All Changes."}
+        {isPending ? "Uploading..." : "Save All Changes."}
       </button>
     </div>
   );
