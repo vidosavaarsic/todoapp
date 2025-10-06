@@ -1,20 +1,25 @@
-import "./App.css";
 import NavBar from "./components/NavBar/NavBar";
 import { ThemeProvider } from "./context/ThemeContext";
 import { BrowserRouter as Router } from "react-router-dom";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./queryClient";
 import { LogProvider } from "./context/LogContext";
 import Main from "./Main";
 
+import "./App.css";
+
 const App = () => {
   return (
-    <ThemeProvider>
-      <LogProvider>
-        <Router>
-          <NavBar />
-          <Main />
-        </Router>
-      </LogProvider>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <LogProvider>
+          <Router>
+            <NavBar />
+            <Main />
+          </Router>
+        </LogProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 

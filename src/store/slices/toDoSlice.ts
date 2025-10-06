@@ -8,6 +8,7 @@ export type ToDoState = {
 };
 
 export type ToDoActions = {
+  addAllToDos: (list: ToDoItem[]) => void;
   addToList: (newItem: ToDoItem) => void;
   completeToDo: (id: number) => void;
   editToDoDesc: (id: number, desc: string) => void;
@@ -18,11 +19,7 @@ export type ToDoActions = {
 export type ToDoSlice = ToDoState & ToDoActions;
 
 const initialToDoState: ToDoState = {
-  toDoList: [
-    { id: 1, description: "NOTE #1", status: "ready" },
-    { id: 2, description: "NOTE #2", status: "done" },
-    { id: 3, description: "NOTE #3", status: "pending" },
-  ],
+  toDoList: [],
 };
 
 type CreateToDoSlice = StateCreator<Store, [], [], ToDoSlice>;
@@ -32,6 +29,9 @@ export const createToDoSlice: CreateToDoSlice = (set, get) => {
 
   return {
     ...initialToDoState,
+    addAllToDos: (list: ToDoItem[]) => {
+      set((state) => ({ toDoList: list }));
+    },
     addToList: (newItem: ToDoItem) => {
       set((state) => ({
         toDoList: [...state.toDoList, newItem],
