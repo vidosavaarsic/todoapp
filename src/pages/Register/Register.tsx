@@ -1,22 +1,31 @@
 import React from "react";
-import { Field, Form } from "react-final-form";
+import { Field, FieldRenderProps, Form } from "react-final-form";
 import { useLogs } from "../../context/LogContext";
 import { useNavigate } from "react-router-dom";
-import Input from "../../components/Input";
-import InputPassword from "../../components/InputPassword";
+import Input from "../../components/Input/Input";
+import InputPassword from "../../components/Input/InputPassword";
 import { validations, confirmPasswordValidations } from "../../consts";
+import "..//LoginRegister.css";
+
+type RegisterFormValues = {
+  fname: string;
+  lname: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 
 const Register = () => {
   const { setLog } = useLogs();
   const navigate = useNavigate();
 
-  const onSubmit = (values: any) => {
+  const onSubmit = (values: RegisterFormValues) => {
     console.log("Form submitted successfully!", values);
     setLog(true);
     navigate("/profile", { replace: true });
   };
 
-  const validate = (values: any) => {
+  const validate = (values: RegisterFormValues) => {
     const errors: any = {};
     if (!values.fname) errors.fname = "Please enter your first name!";
     if (!values.lname) errors.lname = "Please enter your last name!";
@@ -41,7 +50,7 @@ const Register = () => {
   };
 
   return (
-    <div className="formPage">
+    <div>
       <h1 className="title">Registration</h1>
 
       <Form
@@ -50,27 +59,28 @@ const Register = () => {
         render={({ handleSubmit, invalid }) => (
           <form className="form" onSubmit={handleSubmit}>
             <Field name="fname">
-              {({ input, meta }: any) => (
+              {({ input, meta }: FieldRenderProps) => (
                 <Input input={input} meta={meta} label="First Name" />
               )}
             </Field>
             <Field name="lname">
-              {({ input, meta }: any) => (
+              {({ input, meta }: FieldRenderProps) => (
                 <Input input={input} meta={meta} label="Last Name" />
               )}
             </Field>
+
             <Field name="email">
-              {({ input, meta }: any) => (
+              {({ input, meta }: FieldRenderProps) => (
                 <Input input={input} meta={meta} label="Email" />
               )}
             </Field>
             <Field name="password">
-              {({ input, meta }: any) => (
+              {({ input, meta }: FieldRenderProps) => (
                 <InputPassword input={input} meta={meta} label="Password" />
               )}
             </Field>
             <Field name="confirmPassword">
-              {({ input, meta }: any) => (
+              {({ input, meta }: FieldRenderProps) => (
                 <InputPassword
                   input={input}
                   meta={meta}

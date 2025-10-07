@@ -25,86 +25,12 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-/* forms */
-
 .title {
   font-size: xx-large;
   padding-top: 5rem;
   padding-bottom: 5rem;
 }
-.formPage {
-  justify-items: center;
-  margin: 0;
-}
-.form {
-  padding: 1rem;
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.inputInForm {
-  border: 1px solid var(--purple);
-  border-radius: 6px;
-  margin: 1rem 0;
-  width: 22rem;
-  padding: 0.5rem;
-  background-color: transparent;
-}
-.inputInForm.dark:-webkit-autofill {
-  box-shadow: 0 0 0 30px var(--black) inset !important;
-  -webkit-text-fill-color: var(--white) !important;
-}
-.inputInForm:invalid {
-  border: 1px dashed var(--purple);
-}
-.inputInForm:valid {
-  border: 1px solid var(--purple);
-}
-.inputInForm:focus {
-  outline: none;
-  background-color: transparent;
-}
-.submitInForm {
-  border: 1px solid var(--purple);
-  border-radius: 6px;
-  padding: 0.5rem;
-  margin-top: 2rem;
-  width: 10rem;
-  background-color: var(--purple);
-}
-.labelInForm {
-  display: inline-flex;
-  font-weight: 500;
-  color: var(--black);
-  margin-right: 1rem;
-  min-width: 9rem;
-  justify-content: center;
-}
-.labelInForm.dark {
-  color: var(--white);
-}
-.errorText {
-  color: var(--red);
-  font-style: italic;
-  margin-top: -15px;
-  text-align: right;
-}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

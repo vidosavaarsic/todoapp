@@ -1,20 +1,15 @@
 import classNames from "classnames";
 import React from "react";
-import { useTheme } from "../context/ThemeContext";
+import { useTheme } from "../../context/ThemeContext";
+import { FieldRenderProps } from "react-final-form";
+import "./Input.css";
 
-type InputProps = {
-  input: {
-    name: string;
-    value: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onBlur: () => void;
-    onFocus: () => void;
-  };
-  meta: any;
+type InputProps = FieldRenderProps & {
   label: string;
 };
-const InputPassword = ({ input, meta, label }: InputProps) => {
+const Input = ({ input, meta, label }: InputProps) => {
   const { darkMode } = useTheme();
+
   return (
     <div>
       <label
@@ -25,7 +20,7 @@ const InputPassword = ({ input, meta, label }: InputProps) => {
       </label>
       <input
         {...input}
-        type="password"
+        type={input.name}
         id={input.name}
         className={classNames("inputInForm", { dark: darkMode })}
       />
@@ -34,4 +29,4 @@ const InputPassword = ({ input, meta, label }: InputProps) => {
   );
 };
 
-export default InputPassword;
+export default Input;
