@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useLogs } from "../../context/LogContext";
-import ThemeChanger from "../../ThemeChanger";
 import { useTheme } from "../../context/ThemeContext";
 import classNames from "classnames";
 import { Form, Field } from "react-final-form";
@@ -61,9 +60,6 @@ const Login = () => {
   return (
     <div className="formPage">
       <h1 className="title">Login</h1>
-      <br />
-      <ThemeChanger />
-
       <Form
         onSubmit={onSubmit}
         validate={validate}

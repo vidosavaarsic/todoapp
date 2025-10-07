@@ -3,7 +3,6 @@ import useMainStore from "../../store/useMainStore";
 import { FilterStatusType, ToDoItem } from "../../types";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { fetchTodos, uploadTodoList } from "../../api/mockTodoDb";
-import ThemeChanger from "../../ThemeChanger";
 import ToDoList from "./components/ToDoList/ToDoList";
 import ToDoFilter from "./components/ToDoFilter/ToDoFilter";
 
@@ -91,7 +90,6 @@ const ToDoForm: React.FC = () => {
           statusFilter={statusFilter}
           handleStatusFilterChange={handleStatusFilterChange}
         />
-        <ThemeChanger />
       </div>
 
       <div className="flex flex-col gap-2 m-4 items-center">

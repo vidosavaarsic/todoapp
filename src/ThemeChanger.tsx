@@ -8,7 +8,7 @@ const ThemeChanger = () => {
 
   return (
     <div>
-      <label className="relative inline-flex items-center cursor-pointer">
+      <label className="relative inline-flex items-center cursor-pointer mt-1">
         <input
           type="checkbox"
           className="sr-only peer"

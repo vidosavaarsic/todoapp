@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import React from "react";
-import ThemeChanger from "../../ThemeChanger";
 import { useTheme } from "../../context/ThemeContext";
 import { Field, Form } from "react-final-form";
 import { useLogs } from "../../context/LogContext";
@@ -52,8 +51,6 @@ const Register = () => {
   return (
     <div className="formPage">
       <h1 className="title">Registration</h1>
-      <br />
-      <ThemeChanger />
 
       <Form
         onSubmit={onSubmit}
