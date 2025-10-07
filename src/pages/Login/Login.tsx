@@ -39,7 +39,7 @@ const Login = () => {
       <Form
         onSubmit={onSubmit}
         validate={validate}
-        render={({ handleSubmit, errors }) => (
+        render={({ handleSubmit, invalid }) => (
           <form className="form" onSubmit={handleSubmit}>
             <Field name="email">
               {({ input, meta }: any) => (
@@ -53,7 +53,7 @@ const Login = () => {
               )}
             </Field>
 
-            <button className="submitInForm" type="submit">
+            <button className="submitInForm" type="submit" disabled={invalid}>
               Submit
             </button>
           </form>

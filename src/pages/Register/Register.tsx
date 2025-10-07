@@ -47,7 +47,7 @@ const Register = () => {
       <Form
         onSubmit={onSubmit}
         validate={validate}
-        render={({ handleSubmit }) => (
+        render={({ handleSubmit, invalid }) => (
           <form className="form" onSubmit={handleSubmit}>
             <Field name="fname">
               {({ input, meta }: any) => (
@@ -79,7 +79,7 @@ const Register = () => {
               )}
             </Field>
 
-            <button className="submitInForm" type="submit">
+            <button className="submitInForm" type="submit" disabled={invalid}>
               Submit
             </button>
           </form>
