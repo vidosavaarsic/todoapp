@@ -1,21 +1,13 @@
-import classNames from "classnames";
 import React from "react";
-import { useTheme } from "../../context/ThemeContext";
 import { Field, Form } from "react-final-form";
 import { useLogs } from "../../context/LogContext";
 import { useNavigate } from "react-router-dom";
-import { validations } from "../Login/Login";
-
-const confirmPasswordValidations = [
-  {
-    test: (confirmPass: string, pass?: string) => confirmPass !== pass,
-    message: "Passwords do not match!",
-  },
-];
+import Input from "../../components/Input";
+import InputPassword from "../../components/InputPassword";
+import { validations, confirmPasswordValidations } from "../../consts";
 
 const Register = () => {
   const { setLog } = useLogs();
-  const { darkMode } = useTheme();
   const navigate = useNavigate();
 
   const onSubmit = (values: any) => {
@@ -59,107 +51,31 @@ const Register = () => {
           <form className="form" onSubmit={handleSubmit}>
             <Field name="fname">
               {({ input, meta }: any) => (
-                <div>
-                  <label
-                    htmlFor="fname"
-                    className={classNames("labelInForm", { dark: darkMode })}
-                  >
-                    First Name
-                  </label>
-                  <input
-                    {...input}
-                    type="text"
-                    id="fname"
-                    className={classNames("inputInForm", { dark: darkMode })}
-                  />
-                  {meta.touched && meta.error && (
-                    <p className="errorText">{meta.error}</p>
-                  )}
-                </div>
+                <Input input={input} meta={meta} label="First Name" />
               )}
             </Field>
             <Field name="lname">
               {({ input, meta }: any) => (
-                <div>
-                  <label
-                    htmlFor="lname"
-                    className={classNames("labelInForm", { dark: darkMode })}
-                  >
-                    Last Name
-                  </label>
-                  <input
-                    {...input}
-                    type="text"
-                    id="lname"
-                    className={classNames("inputInForm", { dark: darkMode })}
-                  />
-                  {meta.touched && meta.error && (
-                    <p className="errorText">{meta.error}</p>
-                  )}
-                </div>
+                <Input input={input} meta={meta} label="Last Name" />
               )}
             </Field>
             <Field name="email">
               {({ input, meta }: any) => (
-                <div>
-                  <label
-                    htmlFor="email"
-                    className={classNames("labelInForm", { dark: darkMode })}
-                  >
-                    Your email
-                  </label>
-                  <input
-                    {...input}
-                    type="email"
-                    id="email"
-                    className={classNames("inputInForm", { dark: darkMode })}
-                  />
-                  {meta.touched && meta.error && (
-                    <p className="errorText">{meta.error}</p>
-                  )}
-                </div>
+                <Input input={input} meta={meta} label="Email" />
               )}
             </Field>
             <Field name="password">
               {({ input, meta }: any) => (
-                <div>
-                  <label
-                    htmlFor="password"
-                    className={classNames("labelInForm", { dark: darkMode })}
-                  >
-                    Password
-                  </label>
-                  <input
-                    {...input}
-                    type="password"
-                    id="password"
-                    className={classNames("inputInForm", { dark: darkMode })}
-                  />
-                  {meta.touched && meta.error && (
-                    <p className="errorText">{meta.error}</p>
-                  )}
-                </div>
+                <InputPassword input={input} meta={meta} label="Password" />
               )}
             </Field>
             <Field name="confirmPassword">
               {({ input, meta }: any) => (
-                <div>
-                  <label
-                    htmlFor="confirmPassword"
-                    className={classNames("labelInForm", { dark: darkMode })}
-                  >
-                    Confirm Password
-                  </label>
-                  <input
-                    {...input}
-                    type="password"
-                    id="confirmPassword"
-                    className={classNames("inputInForm", { dark: darkMode })}
-                  />
-                  {meta.touched && meta.error && (
-                    <p className="errorText">{meta.error}</p>
-                  )}
-                </div>
+                <InputPassword
+                  input={input}
+                  meta={meta}
+                  label="Confirm Password"
+                />
               )}
             </Field>
 

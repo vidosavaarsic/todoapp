@@ -1,37 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useLogs } from "../../context/LogContext";
-import { useTheme } from "../../context/ThemeContext";
-import classNames from "classnames";
 import { Form, Field } from "react-final-form";
-import "./Login.css";
-
-export const validations = [
-  {
-    test: (val: string) => val.length < 6,
-    message: "Password must be at least 6 characters",
-  },
-  {
-    test: (val: string) => val.length > 20,
-    message: "Password must be less than 20 characters",
-  },
-  {
-    test: (val: string) => !/[A-Z]/.test(val),
-    message: "Password must contain an uppercase letter",
-  },
-  {
-    test: (val: string) => !/[!@#$%^&*]/.test(val),
-    message: "Password must contain a special character",
-  },
-  {
-    test: (val: string) => !/\d/.test(val),
-    message: "Password must contain a number",
-  },
-];
+import { useLogs } from "../../context/LogContext";
+import Input from "../../components/Input";
+import InputPassword from "../../components/InputPassword";
+import { validations } from "../../consts";
 
 const Login = () => {
   const { setLog } = useLogs();
-  const { darkMode } = useTheme();
   const navigate = useNavigate();
 
   const onSubmit = (values: any) => {
@@ -67,46 +43,13 @@ const Login = () => {
           <form className="form" onSubmit={handleSubmit}>
             <Field name="email">
               {({ input, meta }: any) => (
-                <div>
-                  <label
-                    htmlFor="email"
-                    className={classNames("labelInForm", { dark: darkMode })}
-                  >
-                    Email
-                  </label>
-                  <input
-                    {...input}
-                    type="email"
-                    id="email"
-                    className={classNames("inputInForm", { dark: darkMode })}
-                    placeholder="example@gmail.com"
-                  />
-                  {meta.touched && meta.error && (
-                    <p className="errorText">{meta.error}</p>
-                  )}
-                </div>
+                <Input input={input} meta={meta} label="Email" />
               )}
             </Field>
 
             <Field name="password">
               {({ input, meta }: any) => (
-                <div>
-                  <label
-                    htmlFor="password"
-                    className={classNames("labelInForm", { dark: darkMode })}
-                  >
-                    Password
-                  </label>
-                  <input
-                    {...input}
-                    type="password"
-                    id="password"
-                    className={classNames("inputInForm", { dark: darkMode })}
-                  />
-                  {meta.touched && meta.error && (
-                    <p className="errorText">{meta.error}</p>
-                  )}
-                </div>
+                <InputPassword input={input} meta={meta} label="Password" />
               )}
             </Field>
 
