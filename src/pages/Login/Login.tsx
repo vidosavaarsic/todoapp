@@ -1,59 +1,70 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Form, Field, FieldRenderProps } from "react-final-form";
 import { useLogs } from "../../context/LogContext";
-import ThemeChanger from "../../ThemeChanger";
-import { useTheme } from "../../context/ThemeContext";
-import classNames from "classnames";
+import Input from "../../components/Input/Input";
+import InputPassword from "../../components/Input/InputPassword";
+import { validations } from "../../consts";
+import "..//LoginRegister.css";
+
+type LoginFormValues = {
+  email: string;
+  password: string;
+};
 
 const Login = () => {
-  const { log, setLog } = useLogs();
-  const { darkMode } = useTheme();
-
+  const { setLog } = useLogs();
   const navigate = useNavigate();
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    console.log("Prevent default submit");
-    if (true) {
-      setLog(true);
-    }
+  const onSubmit = (values: LoginFormValues) => {
+    console.log("Submitted values:", values);
+    setLog(true);
+    navigate("/profile", { replace: true });
   };
 
-  useEffect(() => {
-    if (log) {
-      navigate("/profile", { replace: true });
+  const validate = (values: LoginFormValues) => {
+    const errors: any = {};
+    if (!values.email) errors.email = "Email is required";
+    if (!values.password) {
+      errors.password = "Password is required";
+      return errors;
     }
-  }, [log, navigate]);
+
+    const failedValidation = validations.find(({ test }) =>
+      test(values.password)
+    );
+
+    errors.password = failedValidation?.message;
+
+    return errors;
+  };
 
   return (
-    <div className="formPage">
+    <div>
       <h1 className="title">Login</h1>
-      <br />
-      <ThemeChanger />
-      <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="email"> Your Email </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          className={classNames("inputInForm", { dark: darkMode })}
-          required
-        />
+      <Form
+        onSubmit={onSubmit}
+        validate={validate}
+        render={({ handleSubmit, invalid }) => (
+          <form className="form" onSubmit={handleSubmit}>
+            <Field name="email">
+              {({ input, meta }: FieldRenderProps) => (
+                <Input input={input} meta={meta} label="Email" />
+              )}
+            </Field>
 
-        <label htmlFor="password"> Password </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          className={classNames("inputInForm", { dark: darkMode })}
-          required
-          pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).+$"
-          minLength={6}
-          maxLength={20}
-        />
+            <Field name="password">
+              {({ input, meta }: FieldRenderProps) => (
+                <InputPassword input={input} meta={meta} label="Password" />
+              )}
+            </Field>
 
-        <button className="submitInForm">Submit</button>
-      </form>
+            <button className="submitInForm" type="submit" disabled={invalid}>
+              Submit
+            </button>
+          </form>
+        )}
+      />
     </div>
   );
 };

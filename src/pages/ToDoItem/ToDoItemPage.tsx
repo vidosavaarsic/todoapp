@@ -13,7 +13,7 @@ const ToDoItemPage = () => {
   if (!todo) return <div>ToDo with {id} was not found</div>;
 
   return (
-    <div className="formPage">
+    <div>
       <h1 className="title">{todo.description}</h1>
       <article>
         <p>{todo.status}</p>

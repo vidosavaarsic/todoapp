@@ -1,9 +1,8 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import useMainStore from "../../store/useMainStore";
 import { FilterStatusType, ToDoItem } from "../../types";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { fetchTodos, uploadTodoList } from "../../api/mockTodoDb";
-import ThemeChanger from "../../ThemeChanger";
 import ToDoList from "./components/ToDoList/ToDoList";
 import ToDoFilter from "./components/ToDoFilter/ToDoFilter";
 
@@ -63,7 +62,7 @@ const ToDoForm: React.FC = () => {
   if (isLoading)
     return (
       <div className="text-center p-4">
-        <h1 className="mx-auto py-2 mb-8 pt-16 font-semibold lg:text-4xl md:text-3xl text-2xl">
+        <h1 className="mx-auto py-2 mb-8 pt-16 font-semibold lg:text-2xl md:text-xl text-2xl">
           Loading...
         </h1>
       </div>
@@ -80,9 +79,7 @@ const ToDoForm: React.FC = () => {
 
   return (
     <div className="justify-center">
-      <h1 className="mx-auto py-2 mb-8 pt-16 font-semibold lg:text-4xl md:text-3xl text-2xl">
-        TODO LIST
-      </h1>
+      <h1 className="title">To Do List</h1>
 
       <div className="flex flex-row justify-center gap-6 flex-wrap-reverse p-4">
         <ToDoFilter
@@ -91,7 +88,6 @@ const ToDoForm: React.FC = () => {
           statusFilter={statusFilter}
           handleStatusFilterChange={handleStatusFilterChange}
         />
-        <ThemeChanger />
       </div>
 
       <div className="flex flex-col gap-2 m-4 items-center">

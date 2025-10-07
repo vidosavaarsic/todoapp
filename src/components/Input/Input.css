@@ -1,0 +1,17 @@
+.labelInForm {
+  display: inline-flex;
+  font-weight: 500;
+  color: var(--black);
+  margin-right: 1rem;
+  min-width: 9rem;
+  justify-content: center;
+}
+.labelInForm.dark {
+  color: var(--white);
+}
+.errorText {
+  color: var(--red);
+  font-style: italic;
+  margin-top: -15px;
+  text-align: right;
+}

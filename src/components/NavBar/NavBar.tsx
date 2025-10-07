@@ -4,6 +4,7 @@ import { useTheme } from "../../context/ThemeContext";
 import { NavLink } from "react-router-dom";
 import { useLogs } from "../../context/LogContext";
 import classNames from "classnames";
+import ThemeChanger from "../../ThemeChanger";
 
 const NavBar: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -82,9 +83,10 @@ const NavBar: React.FC = () => {
             >
               {nav.label}
             </NavLink>
-          ))}{" "}
+          ))}
         </nav>
       )}
+      <ThemeChanger />
     </div>
   );
 };

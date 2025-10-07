@@ -1,111 +1,100 @@
-import classNames from "classnames";
-import React, { useState } from "react";
-import ThemeChanger from "../../ThemeChanger";
-import { useTheme } from "../../context/ThemeContext";
+import React from "react";
+import { Field, FieldRenderProps, Form } from "react-final-form";
+import { useLogs } from "../../context/LogContext";
+import { useNavigate } from "react-router-dom";
+import Input from "../../components/Input/Input";
+import InputPassword from "../../components/Input/InputPassword";
+import { validations, confirmPasswordValidations } from "../../consts";
+import "..//LoginRegister.css";
+
+type RegisterFormValues = {
+  fname: string;
+  lname: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
 
 const Register = () => {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(false);
+  const { setLog } = useLogs();
+  const navigate = useNavigate();
 
-  const { darkMode } = useTheme();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (password !== confirmPassword) {
-      setErrorMessage(true);
-
-      return;
-    }
-
-    setErrorMessage(false);
-    console.log("Form submitted successfully!");
-    // Submit logic here
+  const onSubmit = (values: RegisterFormValues) => {
+    console.log("Form submitted successfully!", values);
+    setLog(true);
+    navigate("/profile", { replace: true });
   };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-    if (errorMessage && confirmPassword === e.target.value) {
-      setErrorMessage(false);
-    }
-  };
+  const validate = (values: RegisterFormValues) => {
+    const errors: any = {};
+    if (!values.fname) errors.fname = "Please enter your first name!";
+    if (!values.lname) errors.lname = "Please enter your last name!";
+    if (!values.email) errors.email = "Please enter your email!";
 
-  const handleConfirmPasswordChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setConfirmPassword(e.target.value);
-    if (errorMessage && password === e.target.value) {
-      setErrorMessage(false);
+    if (!values.password) {
+      errors.password = "Password is required";
+      return errors;
     }
+
+    const failedPassowrd = validations.find(({ test }) =>
+      test(values.password)
+    );
+    errors.password = failedPassowrd?.message;
+
+    const failedConfirm = confirmPasswordValidations.find(({ test }) =>
+      test(values.confirmPassword, values.password)
+    );
+    errors.confirmPassword = failedConfirm?.message;
+
+    return errors;
   };
 
   return (
-    <div className="formPage">
+    <div>
       <h1 className="title">Registration</h1>
-      <br />
-      <ThemeChanger />
-      <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="fname"> First Name </label>
-        <input
-          type="text"
-          id="fname"
-          name="fname"
-          className={classNames("inputInForm", { dark: darkMode })}
-          required
-          title="Please enter your first name"
-        />
 
-        <label htmlFor="lname"> Last Name </label>
-        <input
-          type="text"
-          id="lname"
-          name="lname"
-          className={classNames("inputInForm", { dark: darkMode })}
-          required
-        />
+      <Form
+        onSubmit={onSubmit}
+        validate={validate}
+        render={({ handleSubmit, invalid }) => (
+          <form className="form" onSubmit={handleSubmit}>
+            <Field name="fname">
+              {({ input, meta }: FieldRenderProps) => (
+                <Input input={input} meta={meta} label="First Name" />
+              )}
+            </Field>
+            <Field name="lname">
+              {({ input, meta }: FieldRenderProps) => (
+                <Input input={input} meta={meta} label="Last Name" />
+              )}
+            </Field>
 
-        <label htmlFor="email"> Your Email </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          className={classNames("inputInForm", { dark: darkMode })}
-          required
-        />
+            <Field name="email">
+              {({ input, meta }: FieldRenderProps) => (
+                <Input input={input} meta={meta} label="Email" />
+              )}
+            </Field>
+            <Field name="password">
+              {({ input, meta }: FieldRenderProps) => (
+                <InputPassword input={input} meta={meta} label="Password" />
+              )}
+            </Field>
+            <Field name="confirmPassword">
+              {({ input, meta }: FieldRenderProps) => (
+                <InputPassword
+                  input={input}
+                  meta={meta}
+                  label="Confirm Password"
+                />
+              )}
+            </Field>
 
-        <label htmlFor="password"> Password </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-          className={classNames("inputInForm", { dark: darkMode })}
-          required
-          pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).+$"
-          minLength={6}
-          maxLength={20}
-        />
-
-        <label htmlFor="confirmPass"> Confirm Password </label>
-        <input
-          type="password"
-          id="confirmPass"
-          name="confirmPass"
-          value={confirmPassword}
-          onChange={handleConfirmPasswordChange}
-          className={classNames("inputInForm", { dark: darkMode })}
-          required
-          pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d).+$"
-          minLength={6}
-          maxLength={20}
-        />
-        {errorMessage && (
-          <p className="text-red-500">Passwords do not match!</p>
+            <button className="submitInForm" type="submit" disabled={invalid}>
+              Submit
+            </button>
+          </form>
         )}
-        <button className="submitInForm">Submit</button>
-      </form>
+      />
     </div>
   );
 };
