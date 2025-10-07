@@ -3,12 +3,26 @@ import React from "react";
 import ThemeChanger from "../../ThemeChanger";
 import { useTheme } from "../../context/ThemeContext";
 import { Field, Form } from "react-final-form";
+import { useLogs } from "../../context/LogContext";
+import { useNavigate } from "react-router-dom";
+import { validations } from "../Login/Login";
+
+const confirmPasswordValidations = [
+  {
+    test: (confirmPass: string, pass?: string) => confirmPass !== pass,
+    message: "Passwords do not match!",
+  },
+];
 
 const Register = () => {
+  const { setLog } = useLogs();
   const { darkMode } = useTheme();
+  const navigate = useNavigate();
 
   const onSubmit = (values: any) => {
     console.log("Form submitted successfully!", values);
+    setLog(true);
+    navigate("/profile", { replace: true });
   };
 
   const validate = (values: any) => {
@@ -19,19 +33,19 @@ const Register = () => {
 
     if (!values.password) {
       errors.password = "Password is required";
-    } else if (values.password.length < 6) {
-      errors.password = "Password must be at least 6 characters";
-    } else if (values.password.length > 20) {
-      errors.password = "Password must be less than 20 characters";
-    } else if (!/[A-Z]/.test(values.password)) {
-      errors.password = "Password must contain an uppercase letter";
-    } else if (!/[!@#$%^&*]/.test(values.password)) {
-      errors.password = "Password must contain a special character";
-    } else if (!/\d/.test(values.password)) {
-      errors.password = "Password must contain a number";
-    } else if (values.confirmPassword !== values.password) {
-      errors.confirmPassword = "Passwords do not match!";
+      return errors;
     }
+
+    const failedPassowrd = validations.find(({ test }) =>
+      test(values.password)
+    );
+    errors.password = failedPassowrd?.message;
+
+    const failedConfirm = confirmPasswordValidations.find(({ test }) =>
+      test(values.confirmPassword, values.password)
+    );
+    errors.confirmPassword = failedConfirm?.message;
+
     return errors;
   };
 
@@ -152,7 +166,9 @@ const Register = () => {
               )}
             </Field>
 
-            <button className="submitInForm">Submit</button>
+            <button className="submitInForm" type="submit">
+              Submit
+            </button>
           </form>
         )}
       />

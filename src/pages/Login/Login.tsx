@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useLogs } from "../../context/LogContext";
 import ThemeChanger from "../../ThemeChanger";
@@ -6,14 +6,39 @@ import { useTheme } from "../../context/ThemeContext";
 import classNames from "classnames";
 import { Form, Field } from "react-final-form";
 import "./Login.css";
+
+export const validations = [
+  {
+    test: (val: string) => val.length < 6,
+    message: "Password must be at least 6 characters",
+  },
+  {
+    test: (val: string) => val.length > 20,
+    message: "Password must be less than 20 characters",
+  },
+  {
+    test: (val: string) => !/[A-Z]/.test(val),
+    message: "Password must contain an uppercase letter",
+  },
+  {
+    test: (val: string) => !/[!@#$%^&*]/.test(val),
+    message: "Password must contain a special character",
+  },
+  {
+    test: (val: string) => !/\d/.test(val),
+    message: "Password must contain a number",
+  },
+];
+
 const Login = () => {
-  const { log, setLog } = useLogs();
+  const { setLog } = useLogs();
   const { darkMode } = useTheme();
   const navigate = useNavigate();
 
   const onSubmit = (values: any) => {
     console.log("Submitted values:", values);
     setLog(true);
+    navigate("/profile", { replace: true });
   };
 
   const validate = (values: any) => {
@@ -21,25 +46,17 @@ const Login = () => {
     if (!values.email) errors.email = "Email is required";
     if (!values.password) {
       errors.password = "Password is required";
-    } else if (values.password.length < 6) {
-      errors.password = "Password must be at least 6 characters";
-    } else if (values.password.length > 20) {
-      errors.password = "Password must be less than 20 characters";
-    } else if (!/[A-Z]/.test(values.password)) {
-      errors.password = "Password must contain an uppercase letter";
-    } else if (!/[!@#$%^&*]/.test(values.password)) {
-      errors.password = "Password must contain a special character";
-    } else if (!/\d/.test(values.password)) {
-      errors.password = "Password must contain a number";
+      return errors;
     }
+
+    const failedValidation = validations.find(({ test }) =>
+      test(values.password)
+    );
+
+    errors.password = failedValidation?.message;
+
     return errors;
   };
-
-  useEffect(() => {
-    if (log) {
-      navigate("/profile", { replace: true });
-    }
-  }, [log, navigate]);
 
   return (
     <div className="formPage">
@@ -50,7 +67,7 @@ const Login = () => {
       <Form
         onSubmit={onSubmit}
         validate={validate}
-        render={({ handleSubmit }) => (
+        render={({ handleSubmit, errors }) => (
           <form className="form" onSubmit={handleSubmit}>
             <Field name="email">
               {({ input, meta }: any) => (
