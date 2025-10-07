@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import useMainStore from "../../store/useMainStore";
 import { FilterStatusType, ToDoItem } from "../../types";
 import { useQuery, useMutation } from "@tanstack/react-query";
