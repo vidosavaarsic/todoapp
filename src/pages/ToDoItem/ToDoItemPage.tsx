@@ -2,6 +2,11 @@ import React from "react";
 import useMainStore from "../../store/useMainStore";
 import { useParams } from "react-router-dom";
 import "./ItemPage.css";
+import {
+  CheckCircleIcon,
+  EllipsisHorizontalCircleIcon,
+  HandThumbUpIcon,
+} from "@heroicons/react/24/outline";
 
 const ToDoItemPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -15,9 +20,21 @@ const ToDoItemPage = () => {
   return (
     <div>
       <h1 className="title">{todo.description}</h1>
-      <article>
-        <p>{todo.status}</p>
-      </article>
+
+      <div className="status">
+        <strong>Status:</strong>
+
+        <div className="badge">
+          {todo.status}
+          {todo.status === "done" ? (
+            <CheckCircleIcon />
+          ) : todo.status === "pending" ? (
+            <EllipsisHorizontalCircleIcon />
+          ) : (
+            <HandThumbUpIcon />
+          )}
+        </div>
+      </div>
     </div>
   );
 };
