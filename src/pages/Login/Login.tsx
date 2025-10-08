@@ -17,7 +17,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onSubmit = (values: LoginFormValues) => {
-    console.log("Submitted values:", values);
     setLog(true);
     navigate("/profile", { replace: true });
   };

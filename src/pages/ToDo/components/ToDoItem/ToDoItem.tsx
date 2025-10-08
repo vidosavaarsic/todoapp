@@ -98,7 +98,7 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo, history }) => {
         </div>
         <strong
           className={classNames(
-            "text-xl md:text-2xl lg:text-3xl font-semibold text-left",
+            "text-xl md:text-2xl lg:text-3xl font-semibold text-left w-40 lg:w-3/4 md:1/2",
             {
               "line-through text-gray-400": todo.status === "done",
             },

@@ -53,7 +53,7 @@ const ToDoList: React.FC<ToDoListProps> = ({ todos }) => {
 
       <PlusIcon
         onClick={handleAdd}
-        className="fixed bottom-12 right-12 bg-[var(--purple)] hover:brightness-90 text-white w-14 h-14 flex items-center justify-center text-center rounded-full text-3xl cursor-pointer z-50"
+        className="sticky  float-right mt-20  bg-[var(--purple)] hover:brightness-90 text-white w-14 h-14 flex items-center justify-center text-center rounded-full text-3xl cursor-pointer z-50"
       />
 
       {isAdding && (
