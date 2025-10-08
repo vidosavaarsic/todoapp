@@ -126,6 +126,12 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo, history }) => {
             />
           </div>
         )}
+        {history && (
+          <TrashIcon
+            className="w-6 h-6 text-gray-400 cursor-pointer hover:text-red-500"
+            onClick={() => deleteOneFromHistory(todo.id)}
+          />
+        )}
       </div>
 
       {isEditing && (

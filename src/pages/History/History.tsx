@@ -15,11 +15,18 @@ const History = () => {
             "flex flex-col gap-8 items-center w-full text-2xl text-left"
           )}
         >
-          {todoHistory.map((todo, index) => (
-            <li key={index}>
-              <ToDoItem todo={todo} history={true} />
-            </li>
-          ))}
+          {Array.isArray(todoHistory) && todoHistory.length > 0 ? (
+            todoHistory.map((todo, index) => (
+              <li key={index}>
+                <ToDoItem todo={todo} history={true} />
+              </li>
+            ))
+          ) : (
+            <div className="flex flex-col gap-8 mt-8 w-60 h-80 items-center">
+              <img src="Detective.png" alt="Empty" />
+              <p className="text-xl">No history records yet.</p>
+            </div>
+          )}
         </ul>
       </div>
     </div>
