@@ -1,0 +1,12 @@
+.status {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+  font-size: x-large;
+}
+.badge {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

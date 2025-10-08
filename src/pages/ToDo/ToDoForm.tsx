@@ -5,6 +5,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { fetchTodos, uploadTodoList } from "../../api/mockTodoDb";
 import ToDoList from "./components/ToDoList/ToDoList";
 import ToDoFilter from "./components/ToDoFilter/ToDoFilter";
+import { ClipboardDocumentListIcon } from "@heroicons/react/24/outline";
 
 const ToDoForm: React.FC = () => {
   const [searchText, setSearchText] = useState("");
@@ -78,8 +79,11 @@ const ToDoForm: React.FC = () => {
     );
 
   return (
-    <div className="justify-center">
-      <h1 className="title">To Do List</h1>
+    <div className="justify-center pb-10">
+      <span className="flex flex-row items-center justify-center gap-4">
+        <h1 className="title">To Do List</h1>
+        <ClipboardDocumentListIcon className="w-12 h-12" />
+      </span>
 
       <div className="flex flex-row justify-center gap-6 flex-wrap-reverse p-4">
         <ToDoFilter

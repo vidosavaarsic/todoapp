@@ -98,7 +98,7 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo, history }) => {
         </div>
         <strong
           className={classNames(
-            "text-xl md:text-2xl lg:text-3xl font-semibold text-left",
+            "text-xl md:text-2xl lg:text-3xl font-semibold text-left w-40 lg:w-3/4 md:1/2",
             {
               "line-through text-gray-400": todo.status === "done",
             },
@@ -125,6 +125,12 @@ const ToDoItem: React.FC<ToDoItemProps> = ({ todo, history }) => {
               onClick={() => deleteToDo(todo.id)}
             />
           </div>
+        )}
+        {history && (
+          <TrashIcon
+            className="w-6 h-6 text-gray-400 cursor-pointer hover:text-red-500"
+            onClick={() => deleteOneFromHistory(todo.id)}
+          />
         )}
       </div>
 

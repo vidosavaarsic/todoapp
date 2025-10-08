@@ -20,7 +20,6 @@ const Register = () => {
   const navigate = useNavigate();
 
   const onSubmit = (values: RegisterFormValues) => {
-    console.log("Form submitted successfully!", values);
     setLog(true);
     navigate("/profile", { replace: true });
   };
